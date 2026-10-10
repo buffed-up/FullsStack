@@ -39,7 +39,7 @@ function ProductoDetalle() {
       <div className="row">
         <div className="col-md-6">
           <img
-            src={`/${producto.img}`}
+            src={producto.img?.startsWith('/') || producto.img?.startsWith('http') ? producto.img : `/${producto.img}`}
             alt={producto.titulo}
             className="img-fluid rounded"
           />

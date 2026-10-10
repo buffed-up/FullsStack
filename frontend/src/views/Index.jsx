@@ -66,7 +66,7 @@ function Index() {
                     style={{ cursor: 'pointer' }}
                   >
                     <img
-                      src={`/${c.img}`}
+                      src={c.img?.startsWith('/') || c.img?.startsWith('http') ? c.img : `/${c.img}`}
                       className="d-block w-100"
                       style={{ height: '350px', objectFit: 'cover' }}
                       alt={c.titulo}
@@ -126,7 +126,11 @@ function Index() {
                     >
                       <td className="ranking">{i + 1}</td>
                       <td>
-                        <img src={`/${c.img}`} className="img-items" alt={c.titulo} />
+                        <img
+                          src={c.img?.startsWith('/') || c.img?.startsWith('http') ? c.img : `/${c.img}`}
+                          className="img-items"
+                          alt={c.titulo}
+                        />
                       </td>
                       <td>
                         <div className="nombre-items">{c.titulo}</div>
