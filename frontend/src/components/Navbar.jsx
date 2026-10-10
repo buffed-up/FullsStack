@@ -1,11 +1,19 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useCarrito } from '../context/CarritoContext'
+import { useAuth } from '../context/AuthContext'
 
 function Navbar() {
   const { totalProductos } = useCarrito()
+  const { usuario, logout } = useAuth()
   const location = useLocation()
+  const navigate = useNavigate()
 
   const activo = (path) => location.pathname === path ? 'nav-link active' : 'nav-link'
+
+  const handleLogout = () => {
+    logout()
+    navigate('/')
+  }
 
   return (
     <nav className="navbar navbar-expand-lg vapor-nav" data-bs-theme="dark">
@@ -26,10 +34,38 @@ function Navbar() {
             <li className="nav-item">
               <Link className={activo('/productos')} to="/productos">Productos</Link>
             </li>
+            {usuario?.rol === 'admin' && (
+              <li className="nav-item">
+                <Link className={activo('/admin')} to="/admin">Admin</Link>
+              </li>
+            )}
           </ul>
 
-          
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+            {usuario ? (
+              <>
+                <li className="nav-item">
+                  <span className="nav-link" style={{ color: 'var(--vw-cyan)' }}>
+                    Hola, {usuario.nombre}
+                  </span>
+                </li>
+                <li className="nav-item">
+                  <button className="nav-link btn btn-link" onClick={handleLogout} style={{ color: 'var(--vw-pink)' }}>
+                    Salir
+                  </button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-item">
+                  <Link className={activo('/login')} to="/login">Login</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className={activo('/registro')} to="/registro">Registro</Link>
+                </li>
+              </>
+            )}
+
             <li className="nav-item">
               <Link className="nav-link position-relative" to="/carrito" style={{ color: 'var(--vw-cyan)' }}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
