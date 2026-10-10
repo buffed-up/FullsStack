@@ -704,6 +704,13 @@ tarjeta
     transform: scaleY(1) !important;
     opacity: 1 !important;
 }
+.texto-blanco {
+    color: #ffffff !important;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+    opacity: 0.95;
+    font-size: 1.15rem;
+    line-height: 1.8;
+}
 /* ============================================================
    ADMIN — LAYOUT CON SIDEBAR
    ============================================================ */
