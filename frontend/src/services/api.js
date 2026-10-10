@@ -1,17 +1,29 @@
 const BASE_URL = 'http://localhost:3000/api';
 
+// Normaliza rutas de imagen: si no empiezan con / ni http, les antepone /
+function normalizarImg(item) {
+  if (!item || !item.img) return item;
+  if (item.img.startsWith('/') || item.img.startsWith('http')) return item;
+  return { ...item, img: `/${item.img}` };
+}
+
+function normalizarImgs(lista) {
+  if (!Array.isArray(lista)) return lista;
+  return lista.map(normalizarImg);
+}
+
 export async function getProductos() {
   console.log('[api] GET', `${BASE_URL}/productos`);
   const res = await fetch(`${BASE_URL}/productos`);
   if (!res.ok) throw new Error('Error al obtener productos');
-  return res.json();
+  return normalizarImgs(await res.json());
 }
 
 export async function getProducto(id) {
   console.log('[api] GET', `${BASE_URL}/productos/${id}`);
   const res = await fetch(`${BASE_URL}/productos/${id}`);
   if (!res.ok) throw new Error('Producto no encontrado');
-  return res.json();
+  return normalizarImg(await res.json());
 }
 
 export async function crearProducto(datos) {
@@ -21,7 +33,7 @@ export async function crearProducto(datos) {
     body: JSON.stringify(datos)
   });
   if (!res.ok) throw new Error('Error al crear producto');
-  return res.json();
+  return normalizarImg(await res.json());
 }
 
 export async function actualizarProducto(id, datos) {
@@ -31,7 +43,7 @@ export async function actualizarProducto(id, datos) {
     body: JSON.stringify(datos)
   });
   if (!res.ok) throw new Error('Error al actualizar producto');
-  return res.json();
+  return normalizarImg(await res.json());
 }
 
 export async function eliminarProducto(id) {
@@ -95,11 +107,11 @@ export async function getColecciones() {
 export async function getDestacados() {
   const res = await fetch(`${BASE_URL}/productos/destacados`);
   if (!res.ok) throw new Error('Error al obtener destacados');
-  return res.json();
+  return normalizarImgs(await res.json());
 }
 
 export async function getProductosPorColeccion(nombre) {
   const res = await fetch(`${BASE_URL}/productos?coleccion=${encodeURIComponent(nombre)}`);
   if (!res.ok) throw new Error('Error al obtener productos de la colección');
-  return res.json();
+  return normalizarImgs(await res.json());
 }

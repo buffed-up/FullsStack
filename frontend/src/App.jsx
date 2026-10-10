@@ -9,7 +9,14 @@ import ProductoDetalle from './views/ProductoDetalle'
 import Carrito from './views/Carrito'
 import Login from './views/Login'
 import Registro from './views/Registro'
-import Admin from './views/Admin'
+import AdminLayout from './layouts/AdminLayout'
+import AdminDashboard from './views/admin/AdminDashboard'
+import AdminProductos from './views/admin/AdminProductos'
+import AdminCategorias from './views/admin/AdminCategorias'
+import AdminUsuarios from './views/admin/AdminUsuarios'
+import AdminOrdenes from './views/admin/AdminOrdenes'
+import AdminReportes from './views/admin/AdminReportes'
+import AdminPerfil from './views/admin/AdminPerfil'
 
 function App() {
   return (
@@ -17,13 +24,24 @@ function App() {
       <CarritoProvider>
         <Navbar />
         <Routes>
+          {/* Rutas públicas */}
           <Route path="/" element={<Index />} />
           <Route path="/productos" element={<Productos />} />
           <Route path="/producto/:id" element={<ProductoDetalle />} />
           <Route path="/carrito" element={<Carrito />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registro" element={<Registro />} />
-          <Route path="/admin" element={<Admin />} />
+
+          {/* Rutas admin */}
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="productos" element={<AdminProductos />} />
+            <Route path="categorias" element={<AdminCategorias />} />
+            <Route path="usuarios" element={<AdminUsuarios />} />
+            <Route path="ordenes" element={<AdminOrdenes />} />
+            <Route path="reportes" element={<AdminReportes />} />
+            <Route path="perfil" element={<AdminPerfil />} />
+          </Route>
         </Routes>
         <Footer />
       </CarritoProvider>
