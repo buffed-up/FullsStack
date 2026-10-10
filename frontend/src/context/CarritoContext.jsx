@@ -4,8 +4,12 @@ const CarritoContext = createContext()
 
 export function CarritoProvider({ children }) {
   const [carrito, setCarrito] = useState(() => {
-    const guardado = localStorage.getItem('carrito')
-    return guardado ? JSON.parse(guardado) : []
+    try {
+      const guardado = localStorage.getItem('carrito')
+      return guardado ? JSON.parse(guardado) : []
+    } catch {
+      return []
+    }
   })
 
   useEffect(() => {
@@ -37,7 +41,10 @@ export function CarritoProvider({ children }) {
   const vaciarCarrito = () => setCarrito([])
 
   const totalProductos = carrito.reduce((sum, item) => sum + item.cantidad, 0)
-  const totalPrecio = carrito.reduce((sum, item) => sum + item.precio * item.cantidad, 0)
+  const totalPrecio = carrito.reduce(
+    (sum, item) => sum + Number(item.precio) * item.cantidad,
+    0
+  )
 
   return (
     <CarritoContext.Provider value={{
