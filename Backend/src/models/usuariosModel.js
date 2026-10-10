@@ -1,16 +1,38 @@
 const { sql } = require('../config/database');
 
+// Columnas públicas (sin clave) para no exponerla en las respuestas
+const COLUMNAS_PUBLICAS = sql`
+  id, run, nombre, apellido, correo, fecha_nacimiento, rol, region, comuna, direccion
+`;
+
 async function findAll() {
-  return await sql`SELECT * FROM usuarios ORDER BY id`;
+  return await sql`
+    SELECT id, run, nombre, apellido, correo, fecha_nacimiento, rol, region, comuna, direccion
+    FROM usuarios ORDER BY id
+  `;
 }
 
 async function findById(id) {
-  const resultado = await sql`SELECT * FROM usuarios WHERE id = ${id}`;
+  const resultado = await sql`
+    SELECT id, run, nombre, apellido, correo, fecha_nacimiento, rol, region, comuna, direccion
+    FROM usuarios WHERE id = ${id}
+  `;
   return resultado[0];
 }
 
 async function findByCorreo(correo) {
-  const resultado = await sql`SELECT * FROM usuarios WHERE correo = ${correo}`;
+  const resultado = await sql`
+    SELECT id, run, nombre, apellido, correo, fecha_nacimiento, rol, region, comuna, direccion
+    FROM usuarios WHERE correo = ${correo}
+  `;
+  return resultado[0];
+}
+
+// Solo para login: incluye la clave
+async function findByCorreoConClave(correo) {
+  const resultado = await sql`
+    SELECT * FROM usuarios WHERE correo = ${correo}
+  `;
   return resultado[0];
 }
 
@@ -50,6 +72,7 @@ module.exports = {
   findAll,
   findById,
   findByCorreo,
+  findByCorreoConClave,
   insert,
   update,
   remove

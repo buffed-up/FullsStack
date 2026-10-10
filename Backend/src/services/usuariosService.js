@@ -1,10 +1,19 @@
+const bcrypt = require('bcryptjs');
 const usuariosModel = require('../models/usuariosModel');
 
 const DOMINIOS_PERMITIDOS = ['@duoc.cl', '@profesor.duoc.cl', '@gmail.com'];
+const SALT_ROUNDS = 10;
 
 function validarDominioCorreo(correo) {
   const correoMin = correo.toLowerCase();
   return DOMINIOS_PERMITIDOS.some(d => correoMin.endsWith(d));
+}
+
+// Quita la clave de un objeto usuario antes de devolverlo
+function sinClave(usuario) {
+  if (!usuario) return usuario;
+  const { clave, ...resto } = usuario;
+  return resto;
 }
 
 async function listarUsuarios() {
@@ -31,7 +40,15 @@ async function crearUsuario(datos) {
     throw error;
   }
 
-  return await usuariosModel.insert(datos);
+  // Hashear la clave antes de guardarla
+  const claveHasheada = await bcrypt.hash(datos.clave, SALT_ROUNDS);
+
+  const creado = await usuariosModel.insert({
+    ...datos,
+    clave: claveHasheada
+  });
+
+  return sinClave(creado);
 }
 
 async function actualizarUsuario(id, datos) {
@@ -40,7 +57,8 @@ async function actualizarUsuario(id, datos) {
     error.status = 400;
     throw error;
   }
-  return await usuariosModel.update(id, datos);
+  const actualizado = await usuariosModel.update(id, datos);
+  return sinClave(actualizado);
 }
 
 async function eliminarUsuario(id) {
@@ -59,16 +77,21 @@ async function login(correo, clave) {
     throw error;
   }
 
-  const usuario = await usuariosModel.findByCorreo(correo);
-  if (!usuario || usuario.clave !== clave) {
+  const usuario = await usuariosModel.findByCorreoConClave(correo);
+  if (!usuario) {
     const error = new Error('Correo o contraseña incorrectos');
     error.status = 401;
     throw error;
   }
 
-  // Devolvemos el usuario sin la clave
-  const { clave: _, ...usuarioSinClave } = usuario;
-  return usuarioSinClave;
+  const coincide = await bcrypt.compare(clave, usuario.clave);
+  if (!coincide) {
+    const error = new Error('Correo o contraseña incorrectos');
+    error.status = 401;
+    throw error;
+  }
+
+  return sinClave(usuario);
 }
 
 module.exports = {
