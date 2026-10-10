@@ -19,20 +19,17 @@ function ProductoCard({ producto }) {
     navigate(`/producto/${producto.id}`)
   }
 
-  // Clic en cualquier parte de la tarjeta
   const handleClick = () => {
     if (producto.es_portada) irAColeccion()
     else irADetalle()
   }
 
-  // Clic en el botón principal (Ver Detalle / Ver Colección)
   const handleBotonPrincipal = (e) => {
     e.stopPropagation()
     if (producto.es_portada) irAColeccion()
     else irADetalle()
   }
 
-  // Clic en el botón de agregar al carrito
   const handleBotonCarrito = (e) => {
     e.stopPropagation()
     agregarAlCarrito(producto.id, producto.titulo, producto.precio, producto.img)
@@ -46,7 +43,7 @@ function ProductoCard({ producto }) {
         onClick={handleClick}
       >
         <img
-          src={`/${producto.img}`}
+          src={producto.img?.startsWith('/') || producto.img?.startsWith('http') ? producto.img : `/${producto.img}`}
           className="card-img-top vapor-img"
           alt={producto.titulo}
         />

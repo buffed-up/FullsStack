@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useCarrito } from '../context/CarritoContext'
 import React from 'react'
+
 function Carrito() {
   const {
     carrito,
@@ -13,7 +14,6 @@ function Carrito() {
   const [cupon, setCupon] = useState('')
   const [descuentoAplicado, setDescuentoAplicado] = useState(false)
 
-
   const aplicarCupon = () => {
     if (cupon.trim().toUpperCase() === 'VAPOR10') {
       setDescuentoAplicado(true)
@@ -23,10 +23,8 @@ function Carrito() {
     }
   }
 
-  // Calcula el total final
   const totalFinal = descuentoAplicado ? Math.round(totalPrecio * 0.9) : totalPrecio
 
-  // Simula el pago
   const pagar = () => {
     if (carrito.length === 0) {
       alert('Tu carrito está vacío.')
@@ -51,7 +49,7 @@ function Carrito() {
               <div key={item.id} className="row align-items-center mb-4 vapor-card p-3">
                 <div className="col-3">
                   <img
-                    src={`/${item.img}`}
+                    src={item.img?.startsWith('/') || item.img?.startsWith('http') ? item.img : `/${item.img}`}
                     alt={item.titulo}
                     style={{
                       width: '100px',
