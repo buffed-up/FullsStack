@@ -34,6 +34,18 @@ function Navbar() {
             <li className="nav-item">
               <Link className={activo('/productos')} to="/productos">Productos</Link>
             </li>
+            <li className="nav-item">
+              <Link className={activo('/blogs')} to="/blogs">Blogs</Link>
+            </li>
+            <li className="nav-item">
+              <Link className={activo('/ofertas')} to="/ofertas">Ofertas</Link>
+            </li>
+            <li className="nav-item">
+              <Link className={activo('/contactos')} to="/contactos">Contactos</Link>
+            </li>
+            <li className="nav-item">
+              <Link className={activo('/nosotros')} to="/nosotros">Nosotros</Link>
+            </li>
             {usuario?.rol === 'admin' && (
               <li className="nav-item">
                 <Link className={activo('/admin')} to="/admin">Admin</Link>

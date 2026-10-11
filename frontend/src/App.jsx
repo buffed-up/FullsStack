@@ -17,6 +17,11 @@ import AdminUsuarios from './views/admin/AdminUsuarios'
 import AdminOrdenes from './views/admin/AdminOrdenes'
 import AdminReportes from './views/admin/AdminReportes'
 import AdminPerfil from './views/admin/AdminPerfil'
+import Blogs from './views/Blogs'
+import BlogDetalle from './views/BlogDetalle'
+import Ofertas from './views/Ofertas'
+import Contactos from './views/Contactos'
+import Nosotros from './views/Nosotros'
 
 function App() {
   return (
@@ -29,8 +34,14 @@ function App() {
           <Route path="/productos" element={<Productos />} />
           <Route path="/producto/:id" element={<ProductoDetalle />} />
           <Route path="/carrito" element={<Carrito />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/blog/:id" element={<BlogDetalle />} />
+          <Route path="/ofertas" element={<Ofertas />} />
+          <Route path="/contactos" element={<Contactos />} />
+          <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registro" element={<Registro />} />
+
 
           {/* Rutas admin */}
           <Route path="/admin" element={<AdminLayout />}>

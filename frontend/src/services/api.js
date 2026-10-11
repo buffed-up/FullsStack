@@ -115,3 +115,17 @@ export async function getProductosPorColeccion(nombre) {
   if (!res.ok) throw new Error('Error al obtener productos de la colección');
   return normalizarImgs(await res.json());
 }
+
+export async function getBlogs() {
+  console.log('[api] GET', `${BASE_URL}/blogs`);
+  const res = await fetch(`${BASE_URL}/blogs`);
+  if (!res.ok) throw new Error('Error al obtener blogs');
+  return normalizarImgs(await res.json());
+}
+
+export async function getBlog(id) {
+  console.log('[api] GET', `${BASE_URL}/blogs/${id}`);
+  const res = await fetch(`${BASE_URL}/blogs/${id}`);
+  if (!res.ok) throw new Error('Blog no encontrado');
+  return normalizarImg(await res.json());
+}
