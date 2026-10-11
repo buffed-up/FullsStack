@@ -11,6 +11,7 @@ function AdminDashboard() {
     { to: '/admin/ordenes',    titulo: 'Órdenes',     desc: 'Seguimiento de las compras realizadas' },
     { to: '/admin/reportes',   titulo: 'Reportes',    desc: 'Información detallada del sistema' },
     { to: '/admin/perfil',     titulo: 'Perfil',      desc: 'Información personal y configuración' },
+    { to: '/admin/productos-criticos', titulo: 'Productos críticos', desc: 'Productos con stock bajo' },
   ]
 
   return (

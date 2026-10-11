@@ -5,7 +5,7 @@ async function getProductos(req, res) {
     const { coleccion } = req.query;
     const productos = coleccion
       ? await productosService.listarPorColeccion(coleccion)
-      : await productosService.listarIndividuales();
+      : await productosService.listarTodos();
     res.json(productos);
   } catch (error) {
     res.status(error.status || 500).json({ error: error.message });

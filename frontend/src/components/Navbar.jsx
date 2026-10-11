@@ -19,7 +19,7 @@ function Navbar() {
     <nav className="navbar navbar-expand-lg vapor-nav" data-bs-theme="dark">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          <img src="/img/logo.png" alt="Logo" height="64" width="64" />
+          <img src="http://localhost:3000/uploads/logo.png" alt="Logo" height="64" width="64" />
         </Link>
 
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Navegación móvil">
@@ -36,15 +36,6 @@ function Navbar() {
             </li>
             <li className="nav-item">
               <Link className={activo('/blogs')} to="/blogs">Blogs</Link>
-            </li>
-            <li className="nav-item">
-              <Link className={activo('/ofertas')} to="/ofertas">Ofertas</Link>
-            </li>
-            <li className="nav-item">
-              <Link className={activo('/contactos')} to="/contactos">Contactos</Link>
-            </li>
-            <li className="nav-item">
-              <Link className={activo('/nosotros')} to="/nosotros">Nosotros</Link>
             </li>
             {usuario?.rol === 'admin' && (
               <li className="nav-item">

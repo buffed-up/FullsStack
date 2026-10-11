@@ -2,17 +2,27 @@ const { sql } = require('../config/database');
 
 async function findAll() {
   return await sql`
-    SELECT id, usuario_id, fecha, total, estado, nombre_envio, apellido_envio,
-           correo_envio, direccion, region, comuna, indicaciones
-    FROM ordenes ORDER BY id DESC
+    SELECT o.id, o.usuario_id, o.fecha, o.total, o.estado,
+           o.nombre_envio, o.apellido_envio, o.correo_envio,
+           o.direccion, o.region, o.comuna, o.indicaciones,
+           u.nombre AS usuario_nombre, u.apellido AS usuario_apellido,
+           u.correo AS usuario_correo
+    FROM ordenes o
+    LEFT JOIN usuarios u ON u.id = o.usuario_id
+    ORDER BY o.id DESC
   `;
 }
 
 async function findById(id) {
   const ordenes = await sql`
-    SELECT id, usuario_id, fecha, total, estado, nombre_envio, apellido_envio,
-           correo_envio, direccion, region, comuna, indicaciones
-    FROM ordenes WHERE id = ${id}
+    SELECT o.id, o.usuario_id, o.fecha, o.total, o.estado,
+           o.nombre_envio, o.apellido_envio, o.correo_envio,
+           o.direccion, o.region, o.comuna, o.indicaciones,
+           u.nombre AS usuario_nombre, u.apellido AS usuario_apellido,
+           u.correo AS usuario_correo
+    FROM ordenes o
+    LEFT JOIN usuarios u ON u.id = o.usuario_id
+    WHERE o.id = ${id}
   `;
   if (!ordenes[0]) return null;
 
@@ -30,9 +40,15 @@ async function findById(id) {
 
 async function findByUsuario(usuarioId) {
   return await sql`
-    SELECT id, usuario_id, fecha, total, estado, nombre_envio, apellido_envio,
-           correo_envio, direccion, region, comuna, indicaciones
-    FROM ordenes WHERE usuario_id = ${usuarioId} ORDER BY id DESC
+    SELECT o.id, o.usuario_id, o.fecha, o.total, o.estado,
+           o.nombre_envio, o.apellido_envio, o.correo_envio,
+           o.direccion, o.region, o.comuna, o.indicaciones,
+           u.nombre AS usuario_nombre, u.apellido AS usuario_apellido,
+           u.correo AS usuario_correo
+    FROM ordenes o
+    LEFT JOIN usuarios u ON u.id = o.usuario_id
+    WHERE o.usuario_id = ${usuarioId}
+    ORDER BY o.id DESC
   `;
 }
 

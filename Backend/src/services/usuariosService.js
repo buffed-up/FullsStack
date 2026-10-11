@@ -57,7 +57,21 @@ async function actualizarUsuario(id, datos) {
     error.status = 400;
     throw error;
   }
-  const actualizado = await usuariosModel.update(id, datos);
+
+  // Si viene clave, hashearla antes de guardar. Si viene vacía, ignorarla.
+  let datosFinales = datos;
+  if (datos.clave && datos.clave.trim() !== '') {
+    datosFinales = {
+      ...datos,
+      clave: await bcrypt.hash(datos.clave, SALT_ROUNDS)
+    };
+  } else {
+    // Eliminar la clave vacía para no pisarla
+    const { clave, ...resto } = datos;
+    datosFinales = resto;
+  }
+
+  const actualizado = await usuariosModel.update(id, datosFinales);
   return sinClave(actualizado);
 }
 

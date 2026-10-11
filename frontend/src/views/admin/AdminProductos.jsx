@@ -1,9 +1,12 @@
 import { useState, useEffect } from 'react'
 import {
   getProductos,
+  getCategorias,
+  getReportes,
   crearProducto,
   actualizarProducto,
-  eliminarProducto
+  eliminarProducto,
+  subirImagen
 } from '../../services/api'
 
 const TABS = ['Listar', 'Nuevo', 'Editar']
@@ -15,16 +18,17 @@ const FORM_VACIO = {
   descripcion: '',
   categoria_id: '',
   coleccion: '',
-  es_portada: false,
-  destacado: false,
-  orden_destacado: ''
+  stock: 0
 }
 
 function AdminProductos() {
   const [tab, setTab] = useState('Listar')
   const [productos, setProductos] = useState([])
+  const [categorias, setCategorias] = useState([])
+  const [vendidos, setVendidos] = useState({})
   const [cargando, setCargando] = useState(false)
   const [error, setError] = useState('')
+  const [exito, setExito] = useState('')
 
   const [form, setForm] = useState(FORM_VACIO)
   const [editandoId, setEditandoId] = useState(null)
@@ -33,8 +37,19 @@ function AdminProductos() {
     setCargando(true)
     setError('')
     try {
-      const data = await getProductos()
-      setProductos(data)
+      const [prods, cats, reportes] = await Promise.all([
+        getProductos(),
+        getCategorias(),
+        getReportes()
+      ])
+      setProductos(prods)
+      setCategorias(cats)
+
+      const mapa = {}
+      reportes.productosMasVendidos?.forEach(p => {
+        mapa[p.producto_id] = p.total_vendido
+      })
+      setVendidos(mapa)
     } catch (e) {
       setError(e.message)
     } finally {
@@ -45,25 +60,29 @@ function AdminProductos() {
   useEffect(() => { cargar() }, [])
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target
-    setForm({ ...form, [name]: type === 'checkbox' ? checked : value })
+    const { name, value } = e.target
+    setForm({ ...form, [name]: value })
   }
 
   const limpiar = () => {
     setForm(FORM_VACIO)
     setEditandoId(null)
+    setError('')
+    setExito('')
   }
 
   const handleCrear = async (e) => {
     e.preventDefault()
     setError('')
+    setExito('')
     try {
       await crearProducto({
         ...form,
         precio: Number(form.precio),
         categoria_id: form.categoria_id ? Number(form.categoria_id) : null,
-        orden_destacado: form.orden_destacado ? Number(form.orden_destacado) : null
+        stock: Number(form.stock) || 0
       })
+      setExito('Producto creado.')
       limpiar()
       await cargar()
       setTab('Listar')
@@ -76,13 +95,15 @@ function AdminProductos() {
     e.preventDefault()
     if (!editandoId) return
     setError('')
+    setExito('')
     try {
       await actualizarProducto(editandoId, {
         ...form,
         precio: Number(form.precio),
         categoria_id: form.categoria_id ? Number(form.categoria_id) : null,
-        orden_destacado: form.orden_destacado ? Number(form.orden_destacado) : null
+        stock: Number(form.stock) || 0
       })
+      setExito('Producto actualizado.')
       limpiar()
       await cargar()
       setTab('Listar')
@@ -99,22 +120,30 @@ function AdminProductos() {
       descripcion: p.descripcion || '',
       categoria_id: p.categoria_id ?? '',
       coleccion: p.coleccion || '',
-      es_portada: !!p.es_portada,
-      destacado: !!p.destacado,
-      orden_destacado: p.orden_destacado ?? ''
+      stock: p.stock ?? 0
     })
     setEditandoId(p.id)
+    setError('')
+    setExito('')
     setTab('Editar')
   }
 
   const handleEliminar = async (id) => {
     if (!confirm('¿Eliminar este producto?')) return
+    setError('')
+    setExito('')
     try {
       await eliminarProducto(id)
+      setExito('Producto eliminado.')
       await cargar()
     } catch (e) {
       setError(e.message)
     }
+  }
+
+  const nombreCategoria = (id) => {
+    const c = categorias.find(c => c.id === id)
+    return c ? c.nombre : (id ? `#${id}` : '—')
   }
 
   const formFields = (
@@ -131,8 +160,32 @@ function AdminProductos() {
       </div>
 
       <div className="mb-3">
-        <label className="form-label">Imagen (URL o ruta)</label>
-        <input name="img" className="form-control" value={form.img} onChange={handleChange} />
+        <label className="form-label">Imagen</label>
+        <input
+          type="file"
+          accept="image/*"
+          className="form-control"
+          onChange={async (e) => {
+            const archivo = e.target.files?.[0]
+            if (!archivo) return
+            try {
+              const { url } = await subirImagen(archivo)
+              setForm({ ...form, img: url })
+              setExito('Imagen subida.')
+            } catch (err) {
+              setError(err.message)
+            }
+          }}
+        />
+        {form.img && (
+          <div className="mt-2">
+            <img
+              src={form.img.startsWith('http') ? form.img : `http://localhost:3000${form.img}`}
+              alt="preview"
+              style={{ maxWidth: '200px', maxHeight: '120px', objectFit: 'contain', background: '#000', padding: '4px' }}
+            />
+          </div>
+        )}
       </div>
 
       <div className="mb-3">
@@ -142,26 +195,22 @@ function AdminProductos() {
 
       <div className="row">
         <div className="col-md-4 mb-3">
-          <label className="form-label">Categoría ID</label>
-          <input name="categoria_id" type="number" className="form-control" value={form.categoria_id} onChange={handleChange} />
+          <label className="form-label">Categoría</label>
+          <select name="categoria_id" className="form-select" value={form.categoria_id} onChange={handleChange}>
+            <option value="">— Sin categoría —</option>
+            {categorias.map(c => (
+              <option key={c.id} value={c.id}>{c.nombre}</option>
+            ))}
+          </select>
         </div>
         <div className="col-md-4 mb-3">
           <label className="form-label">Colección</label>
           <input name="coleccion" className="form-control" value={form.coleccion} onChange={handleChange} />
         </div>
         <div className="col-md-4 mb-3">
-          <label className="form-label">Orden destacado</label>
-          <input name="orden_destacado" type="number" className="form-control" value={form.orden_destacado} onChange={handleChange} />
+          <label className="form-label">Stock</label>
+          <input name="stock" type="number" min="0" className="form-control" value={form.stock} onChange={handleChange} />
         </div>
-      </div>
-
-      <div className="mb-3">
-        <label className="me-3">
-          <input type="checkbox" name="es_portada" checked={form.es_portada} onChange={handleChange} /> Es portada
-        </label>
-        <label>
-          <input type="checkbox" name="destacado" checked={form.destacado} onChange={handleChange} /> Destacado
-        </label>
       </div>
 
       <button type="submit" className="btn btn-primary">
@@ -190,6 +239,7 @@ function AdminProductos() {
       </ul>
 
       {error && <div className="alert alert-danger">{error}</div>}
+      {exito && <div className="alert alert-success">{exito}</div>}
 
       {tab === 'Listar' && (
         <>
@@ -202,8 +252,9 @@ function AdminProductos() {
                     <th>Img</th>
                     <th>Título</th>
                     <th>Precio</th>
-                    <th>Colección</th>
-                    <th>Destacado</th>
+                    <th>Categoría</th>
+                    <th>Stock</th>
+                    <th>Vendidos</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -211,11 +262,18 @@ function AdminProductos() {
                   {productos.map(p => (
                     <tr key={p.id}>
                       <td>{p.id}</td>
-                      <td>{p.img && <img src={p.img} alt={p.titulo} className="img-items" />}</td>
+                      <td>
+                        {p.img && (
+                          <img src={p.img} alt={p.titulo} className="img-items" />
+                        )}
+                      </td>
                       <td>{p.titulo}</td>
                       <td>${p.precio}</td>
-                      <td>{p.coleccion || '—'}</td>
-                      <td>{p.destacado ? 'Sí' : 'No'}</td>
+                      <td>{nombreCategoria(p.categoria_id)}</td>
+                      <td style={{ color: p.stock <= 5 ? 'var(--vw-pink)' : undefined, fontWeight: p.stock <= 5 ? 'bold' : 'normal' }}>
+                        {p.stock ?? 0}
+                      </td>
+                      <td>{vendidos[p.id] || 0}</td>
                       <td>
                         <button className="btn btn-sm btn-warning me-2" onClick={() => handleEditar(p)}>Editar</button>
                         <button className="btn btn-sm btn-danger" onClick={() => handleEliminar(p.id)}>Eliminar</button>
@@ -229,18 +287,12 @@ function AdminProductos() {
         </>
       )}
 
-      {tab === 'Nuevo' && (
-        <>
-          {formFields}
-        </>
-      )}
+      {tab === 'Nuevo' && formFields}
 
       {tab === 'Editar' && (
-        <>
-          {editandoId
-            ? formFields
-            : <p>Selecciona un producto en la pestaña <strong>Listar</strong> y haz clic en Editar.</p>}
-        </>
+        editandoId
+          ? formFields
+          : <p>Selecciona un producto en la pestaña <strong>Listar</strong> y haz clic en Editar.</p>
       )}
     </>
   )

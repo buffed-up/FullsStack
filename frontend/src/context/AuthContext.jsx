@@ -24,8 +24,13 @@ export function AuthProvider({ children }) {
   const login = (datosUsuario) => setUsuario(datosUsuario)
   const logout = () => setUsuario(null)
 
+  // Actualiza el usuario en memoria (tras editar perfil)
+  const actualizarPerfil = (datosNuevos) => {
+    setUsuario(prev => prev ? { ...prev, ...datosNuevos } : prev)
+  }
+
   return (
-    <AuthContext.Provider value={{ usuario, login, logout }}>
+    <AuthContext.Provider value={{ usuario, login, logout, actualizarPerfil }}>
       {children}
     </AuthContext.Provider>
   )

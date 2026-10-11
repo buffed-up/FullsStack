@@ -860,3 +860,251 @@ tarjeta
     width: 100%;
   }
 }
+
+/* ============================================================
+   UNIFORMIDAD ADMIN — Forzar estética vaporwave en Bootstrap
+   ============================================================ */
+
+/* --- Labels de formularios --- */
+.form-label {
+  color: var(--vw-cyan);
+  font-family: 'VT323', monospace;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-shadow: 0 0 4px rgba(1, 205, 254, 0.4);
+  margin-bottom: 0.25rem;
+}
+
+/* --- Inputs, selects, textareas --- */
+.form-control,
+.form-select,
+input,
+textarea,
+select {
+  background-color: rgba(26, 11, 46, 0.85) !important;
+  border: 1px solid var(--vw-purple) !important;
+  color: var(--vw-text) !important;
+  font-family: 'VT323', monospace !important;
+  font-size: 1.05rem !important;
+  padding: 0.4rem 0.6rem !important;
+}
+
+.form-control:focus,
+.form-select:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  background-color: rgba(26, 11, 46, 0.95) !important;
+  border-color: var(--vw-cyan) !important;
+  box-shadow: 0 0 8px rgba(1, 205, 254, 0.5) !important;
+  color: var(--vw-cyan) !important;
+  outline: none !important;
+}
+
+.form-select option,
+select option {
+  background-color: var(--vw-bg);
+  color: var(--vw-text);
+}
+
+/* --- Checkboxes y radios --- */
+.form-check-input {
+  background-color: rgba(26, 11, 46, 0.85);
+  border: 1px solid var(--vw-purple);
+}
+.form-check-input:checked {
+  background-color: var(--vw-cyan);
+  border-color: var(--vw-cyan);
+}
+.form-check-label {
+  color: var(--vw-text);
+  font-family: 'VT323', monospace;
+}
+
+/* --- Encabezados de tabla (<th>) --- */
+.tabla-vaporwave thead th,
+.tabla-vaporwave th {
+  background-color: rgba(185, 103, 255, 0.15) !important;
+  color: var(--vw-cyan) !important;
+  font-family: 'VT323', monospace !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid var(--vw-purple) !important;
+  padding: 10px 15px !important;
+}
+
+/* --- Filas de tabla: menos negro duro --- */
+.tabla-vaporwave td {
+  background-color: rgba(0, 0, 0, 0.55) !important;
+}
+
+.tabla-vaporwave tbody tr:hover td {
+  background-color: rgba(1, 205, 254, 0.08) !important;
+}
+
+/* --- Tablas estándar de Bootstrap --- */
+.table {
+  color: var(--vw-text);
+}
+
+/* --- Botones uniformes --- */
+.btn {
+  font-family: 'VT323', monospace !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-width: 2px !important;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: transparent !important;
+  color: var(--vw-cyan) !important;
+  border-color: var(--vw-cyan) !important;
+  box-shadow: 0 0 6px rgba(1, 205, 254, 0.5), inset 0 0 6px rgba(1, 205, 254, 0.2);
+}
+.btn-primary:hover {
+  background-color: var(--vw-cyan) !important;
+  color: var(--vw-bg) !important;
+  box-shadow: 0 0 12px var(--vw-cyan);
+}
+
+.btn-success {
+  background-color: transparent !important;
+  color: var(--vw-green) !important;
+  border-color: var(--vw-green) !important;
+  box-shadow: 0 0 6px rgba(5, 255, 161, 0.5), inset 0 0 6px rgba(5, 255, 161, 0.2);
+}
+.btn-success:hover {
+  background-color: var(--vw-green) !important;
+  color: var(--vw-bg) !important;
+  box-shadow: 0 0 12px var(--vw-green);
+}
+
+.btn-warning {
+  background-color: transparent !important;
+  color: var(--vw-yellow) !important;
+  border-color: var(--vw-yellow) !important;
+  box-shadow: 0 0 6px rgba(255, 251, 150, 0.5), inset 0 0 6px rgba(255, 251, 150, 0.2);
+}
+.btn-warning:hover {
+  background-color: var(--vw-yellow) !important;
+  color: var(--vw-bg) !important;
+  box-shadow: 0 0 12px var(--vw-yellow);
+}
+
+.btn-danger {
+  background-color: transparent !important;
+  color: var(--vw-pink) !important;
+  border-color: var(--vw-pink) !important;
+  box-shadow: 0 0 6px rgba(255, 113, 206, 0.5), inset 0 0 6px rgba(255, 113, 206, 0.2);
+}
+.btn-danger:hover {
+  background-color: var(--vw-pink) !important;
+  color: var(--vw-bg) !important;
+  box-shadow: 0 0 12px var(--vw-pink);
+}
+
+.btn-secondary {
+  background-color: transparent !important;
+  color: var(--vw-purple) !important;
+  border-color: var(--vw-purple) !important;
+  box-shadow: 0 0 6px rgba(185, 103, 255, 0.5), inset 0 0 6px rgba(185, 103, 255, 0.2);
+}
+.btn-secondary:hover {
+  background-color: var(--vw-purple) !important;
+  color: var(--vw-bg) !important;
+  box-shadow: 0 0 12px var(--vw-purple);
+}
+
+.btn-sm {
+  padding: 0.25rem 0.75rem !important;
+  font-size: 0.9rem !important;
+}
+
+/* --- Tabs --- */
+.nav-tabs {
+  border-bottom: 2px solid var(--vw-purple);
+}
+.nav-tabs .nav-link {
+  color: var(--vw-purple);
+  font-family: 'VT323', monospace;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  border-radius: 0;
+}
+.nav-tabs .nav-link:hover {
+  color: var(--vw-cyan);
+  border-color: var(--vw-purple) var(--vw-purple) transparent;
+}
+.nav-tabs .nav-link.active {
+  background-color: rgba(1, 205, 254, 0.1);
+  color: var(--vw-cyan);
+  border-color: var(--vw-cyan) var(--vw-cyan) transparent;
+  text-shadow: var(--glow-cyan);
+}
+
+/* --- Alerts coherentes --- */
+.alert {
+  font-family: 'VT323', monospace;
+  border-width: 2px;
+}
+.alert-danger {
+  background-color: rgba(255, 113, 206, 0.1);
+  border-color: var(--vw-pink);
+  color: var(--vw-pink);
+}
+.alert-success {
+  background-color: rgba(5, 255, 161, 0.1);
+  border-color: var(--vw-green);
+  color: var(--vw-green);
+}
+.alert-info {
+  background-color: rgba(1, 205, 254, 0.1);
+  border-color: var(--vw-cyan);
+  color: var(--vw-cyan);
+}
+
+/* --- Links --- */
+a {
+  color: var(--vw-cyan);
+}
+a:hover {
+  color: var(--vw-pink);
+}
+
+/* --- Texto secundario/opacidad --- */
+.text-muted,
+small {
+  color: rgba(224, 230, 237, 0.65) !important;
+}
+
+/* --- <dl> del perfil --- */
+dl.row dt {
+  color: var(--vw-cyan);
+  font-weight: normal;
+}
+dl.row dd {
+  color: var(--vw-text);
+}
+.btn-vapor {
+  background-color: rgba(255, 113, 206, 0.15) !important;
+  color: var(--vw-pink) !important;
+  border: 2px solid var(--vw-pink) !important;
+  box-shadow: 0 0 8px var(--vw-pink), inset 0 0 8px rgba(255, 113, 206, 0.3) !important;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  padding: 0.75rem 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.btn-vapor:hover:not(:disabled) {
+  background-color: var(--vw-pink) !important;
+  color: var(--vw-bg) !important;
+  box-shadow: 0 0 15px var(--vw-pink) !important;
+}
+
+.btn-vapor:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

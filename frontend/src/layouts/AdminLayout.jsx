@@ -20,9 +20,10 @@ function AdminLayout() {
           <NavLink to="/admin/productos" className={linkClass}>Productos</NavLink>
           <NavLink to="/admin/categorias" className={linkClass}>Categorías</NavLink>
           <NavLink to="/admin/usuarios" className={linkClass}>Usuarios</NavLink>
-          <NavLink to="/admin/ordenes" className={linkClass}>Órdenes</NavLink>
+          <NavLink to="/admin/ordenes" className={linkClass}>Boletas</NavLink>
           <NavLink to="/admin/reportes" className={linkClass}>Reportes</NavLink>
           <NavLink to="/admin/perfil" className={linkClass}>Perfil</NavLink>
+          <NavLink to="/admin/productos-criticos" className={linkClass}>Productos críticos</NavLink>
         </nav>
       </aside>
 

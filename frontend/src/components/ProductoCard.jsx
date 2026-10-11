@@ -43,7 +43,7 @@ function ProductoCard({ producto }) {
         onClick={handleClick}
       >
         <img
-          src={producto.img?.startsWith('/') || producto.img?.startsWith('http') ? producto.img : `/${producto.img}`}
+          src={producto.img}
           className="card-img-top vapor-img"
           alt={producto.titulo}
         />

@@ -33,16 +33,16 @@ async function findByColeccion(nombre) {
   `;
 }
 
-async function insert({ titulo, precio, img, descripcion, categoria_id, coleccion }) {
+async function insert({ titulo, precio, img, descripcion, categoria_id, coleccion, stock }) {
   const resultado = await sql`
-    INSERT INTO productos (titulo, precio, img, descripcion, categoria_id, coleccion)
-    VALUES (${titulo}, ${precio}, ${img}, ${descripcion}, ${categoria_id}, ${coleccion})
+    INSERT INTO productos (titulo, precio, img, descripcion, categoria_id, coleccion, stock)
+    VALUES (${titulo}, ${precio}, ${img}, ${descripcion}, ${categoria_id}, ${coleccion}, ${stock ?? 0})
     RETURNING *
   `;
   return resultado[0];
 }
 
-async function update(id, { titulo, precio, img, descripcion, categoria_id, coleccion }) {
+async function update(id, { titulo, precio, img, descripcion, categoria_id, coleccion, stock }) {
   const resultado = await sql`
     UPDATE productos
     SET titulo = ${titulo},
@@ -50,7 +50,8 @@ async function update(id, { titulo, precio, img, descripcion, categoria_id, cole
         img = ${img},
         descripcion = ${descripcion},
         categoria_id = ${categoria_id},
-        coleccion = ${coleccion}
+        coleccion = ${coleccion},
+        stock = ${stock ?? 0}
     WHERE id = ${id}
     RETURNING *
   `;

@@ -10,6 +10,17 @@ function validarPrecio(precio) {
   return n;
 }
 
+function validarStock(stock) {
+  if (stock === undefined || stock === null || stock === '') return 0;
+  const n = Number(stock);
+  if (!Number.isInteger(n) || n < 0) {
+    const error = new Error('stock debe ser un número entero mayor o igual a 0');
+    error.status = 400;
+    throw error;
+  }
+  return n;
+}
+
 async function listarTodos() {
   return await productosModel.findAll();
 }
@@ -37,25 +48,29 @@ async function crearProducto(datos) {
     throw error;
   }
   const precio = validarPrecio(datos.precio);
+  const stock = validarStock(datos.stock);
   return await productosModel.insert({
     titulo: datos.titulo,
     precio,
     img: datos.img || null,
     descripcion: datos.descripcion || null,
     categoria_id: datos.categoria_id || null,
-    coleccion: datos.coleccion || null
+    coleccion: datos.coleccion || null,
+    stock
   });
 }
 
 async function actualizarProducto(id, datos) {
   const precio = validarPrecio(datos.precio);
+  const stock = validarStock(datos.stock);
   return await productosModel.update(id, {
     titulo: datos.titulo,
     precio,
     img: datos.img || null,
     descripcion: datos.descripcion || null,
     categoria_id: datos.categoria_id || null,
-    coleccion: datos.coleccion || null
+    coleccion: datos.coleccion || null,
+    stock
   });
 }
 
