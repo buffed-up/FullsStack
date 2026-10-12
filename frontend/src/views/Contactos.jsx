@@ -8,6 +8,7 @@ function Contactos() {
     mensaje: ''
   })
   const [enviado, setEnviado] = useState(false)
+  const [enviando, setEnviando] = useState(false)
 
   // Maneja los cambios en los inputs
   const handleChange = (e) => {
@@ -15,8 +16,8 @@ function Contactos() {
     setFormData(prev => ({ ...prev, [name]: value }))
   }
 
-  // Maneja el envío del formulario
-  const handleSubmit = (e) => {
+  // Maneja el envío del formulario al backend
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     // Validación básica
@@ -25,17 +26,31 @@ function Contactos() {
       return
     }
 
-    // Simulación de envío (cuando el backend esté listo, aquí irá el fetch)
-    console.log('Datos del formulario:', formData)
+    setEnviando(true)
 
-    // Mostrar mensaje de éxito
-    setEnviado(true)
+    try {
+      const res = await fetch('http://localhost:3000/api/contactos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      })
 
-    // Limpiar formulario después de 4 segundos
-    setTimeout(() => {
-      setFormData({ nombre: '', email: '', asunto: '', mensaje: '' })
-      setEnviado(false)
-    }, 4000)
+      if (!res.ok) throw new Error('Error al enviar mensaje')
+
+      // Mostrar mensaje de éxito
+      setEnviado(true)
+
+      // Limpiar formulario después de 4 segundos
+      setTimeout(() => {
+        setFormData({ nombre: '', email: '', asunto: '', mensaje: '' })
+        setEnviado(false)
+      }, 4000)
+    } catch (err) {
+      alert('Hubo un error al enviar el mensaje. Intenta de nuevo.')
+      console.error(err)
+    } finally {
+      setEnviando(false)
+    }
   }
 
   return (
@@ -123,8 +138,13 @@ function Contactos() {
             </div>
 
             <div className="text-center">
-              <button type="submit" className="btn btn-vapor" style={{ padding: '12px 30px' }}>
-                Enviar Mensaje
+              <button
+                type="submit"
+                className="btn btn-vapor"
+                style={{ padding: '12px 30px' }}
+                disabled={enviando}
+              >
+                {enviando ? 'Enviando...' : 'Enviar Mensaje'}
               </button>
             </div>
 

@@ -13,7 +13,7 @@ function Nosotros() {
       <div className="row align-items-center mb-5">
         <div className="col-md-5 mb-4 mb-md-0">
           <img
-            src="/img/logo.png"
+            src="http://localhost:3000/uploads/logo.png"
             alt="BOOSTED UP!"
             className="img-fluid"
             style={{
@@ -24,7 +24,7 @@ function Nosotros() {
               background: '#000'
             }}
           />
-        </div>
+        </div>  
         <div className="col-md-7">
           <h2 style={{ color: 'var(--vw-cyan)', textShadow: 'var(--glow-cyan)' }}>
             Nacimos en 2026

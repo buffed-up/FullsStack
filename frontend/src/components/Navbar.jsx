@@ -31,17 +31,22 @@ function Navbar() {
             <li className="nav-item">
               <Link className={activo('/')} to="/">Menú Principal</Link>
             </li>
-            <li className="nav-item">
+             <li className="nav-item">
               <Link className={activo('/productos')} to="/productos">Productos</Link>
+            </li>
+            <li className="nav-item">
+              <Link className={activo('/ofertas')} to="/ofertas">Ofertas</Link>
             </li>
             <li className="nav-item">
               <Link className={activo('/blogs')} to="/blogs">Blogs</Link>
             </li>
-            {usuario?.rol === 'admin' && (
-              <li className="nav-item">
-                <Link className={activo('/admin')} to="/admin">Admin</Link>
-              </li>
-            )}
+            <li className="nav-item">
+              <Link className={activo('/nosotros')} to="/nosotros">Nosotros</Link>
+            </li>
+            <li className="nav-item">
+              <Link className={activo('/contactos')} to="/contactos">Contactos</Link>
+            </li>
+          
           </ul>
 
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">

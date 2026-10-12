@@ -21,6 +21,7 @@ const ordenesRoutes = require('./routes/ordenesRoutes');
 const reportesRoutes = require('./routes/reportesRoutes');
 const uploadsRoutes = require('./routes/uploadsRoutes');
 const blogRoutes = require('./routes/blogRoutes');
+const contactosRoutes = require('./routes/contactosRoutes');
 
 app.use('/api/productos', productosRoutes);
 app.use('/api/usuarios', usuariosRoutes);
@@ -29,5 +30,6 @@ app.use('/api/ordenes', ordenesRoutes);
 app.use('/api/reportes', reportesRoutes);
 app.use('/api/uploads', uploadsRoutes);
 app.use('/api/blogs', blogRoutes);
+app.use('/api/contactos', contactosRoutes);
 
 module.exports = app;
