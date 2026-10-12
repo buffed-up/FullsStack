@@ -312,7 +312,6 @@ input:focus, textarea:focus {
     margin-right: -50vw;
 }
 
-/* El container interior mantiene el contenido centrado */
 .footer-vapor .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -411,7 +410,6 @@ input:focus, textarea:focus {
     transform: translateY(-3px);
 }
 
-/* Responsive Footer */
 @media (max-width: 768px) {
     .footer-vapor {
         padding: 25px 0 15px 0;
@@ -446,7 +444,7 @@ input:focus, textarea:focus {
    ============================================================ */
 
 .vapor-card {
-    background-color: rgba(26, 11, 46, 0.85) !important; /* Fondo oscuro transparente */
+    background-color: rgba(26, 11, 46, 0.85) !important;
     border: 2px solid var(--vw-purple);
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(185, 103, 255, 0.2);
@@ -460,17 +458,17 @@ input:focus, textarea:focus {
     box-shadow: 0 0 25px rgba(1, 205, 254, 0.4);
 }
 
-/* Imagen del producto */
 .vapor-img {
     border-bottom: 2px solid var(--vw-purple);
     width: 100%;
-    height: 180px;
-    object-fit: cover;
+    height: 220px;
+    object-fit: contain;
+    background-color: #000;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
+    padding: 10px;
 }
 
-/* Título del producto */
 .vapor-title {
     color: var(--vw-pink);
     text-shadow: 0 0 5px var(--vw-pink);
@@ -480,7 +478,6 @@ input:focus, textarea:focus {
     letter-spacing: 1px;
 }
 
-/* Precio */
 .vapor-price {
     color: var(--vw-green);
     font-size: 1.5rem;
@@ -489,31 +486,35 @@ input:focus, textarea:focus {
     margin-bottom: 10px;
 }
 
-/* Botón Añadir */
 .btn-vapor {
-    background-color: transparent;
-    color: var(--vw-pink);
-    border: 2px solid var(--vw-pink);
-    box-shadow: 0 0 5px var(--vw-pink), inset 0 0 5px var(--vw-pink);
+    background-color: rgba(255, 113, 206, 0.15) !important;
+    color: var(--vw-pink) !important;
+    border: 2px solid var(--vw-pink) !important;
+    box-shadow: 0 0 8px var(--vw-pink), inset 0 0 8px rgba(255, 113, 206, 0.3) !important;
     font-family: 'Press Start 2P', cursive;
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
-    transition: all 0.3s ease;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.2s ease;
 }
 
-.btn-vapor:hover {
-    background-color: var(--vw-pink);
-    color: var(--vw-bg);
-    box-shadow: 0 0 15px var(--vw-pink);
-    border-color: var(--vw-pink);
+.btn-vapor:hover:not(:disabled) {
+    background-color: var(--vw-pink) !important;
+    color: var(--vw-bg) !important;
+    box-shadow: 0 0 15px var(--vw-pink) !important;
+}
+
+.btn-vapor:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
 }
 
 /* ============================================================
    PESTAÑAS (TABS) ESTILO NAVBAR VAPORWAVE
    ============================================================ */
 .btn-vapor-tab {
-    background-color: var(--vw-bg) !important; /* Fondo morado oscuro como el navbar */
-    color: var(--vw-purple) !important; /* Texto púrpura como el navbar */
+    background-color: var(--vw-bg) !important;
+    color: var(--vw-purple) !important;
     border: 2px solid var(--vw-purple) !important;
     font-family: 'Press Start 2P', cursive;
     font-size: 0.7rem;
@@ -524,18 +525,18 @@ input:focus, textarea:focus {
 }
 
 .btn-vapor-tab:hover {
-    background-color: var(--vw-bg) !important; /* Mantiene el fondo oscuro */
-    color: var(--vw-cyan) !important; /* Texto cian al pasar el mouse */
+    background-color: var(--vw-bg) !important;
+    color: var(--vw-cyan) !important;
     border-color: var(--vw-cyan) !important;
-    text-shadow: 0 0 8px var(--vw-cyan); /* Efecto de brillo neón cian */
+    text-shadow: 0 0 8px var(--vw-cyan);
     box-shadow: 0 0 10px rgba(1, 205, 254, 0.3);
 }
 
 .btn-vapor-tab.active {
-    background-color: var(--vw-bg) !important; /* Fondo oscuro, como navbar */
-    color: var(--vw-cyan) !important; /* Texto cian brillante (estado activo) */
+    background-color: var(--vw-bg) !important;
+    color: var(--vw-cyan) !important;
     border-color: var(--vw-cyan) !important;
-    text-shadow: 0 0 8px var(--vw-cyan); /* Brillo neón */
+    text-shadow: 0 0 8px var(--vw-cyan);
     box-shadow: 0 0 15px rgba(1, 205, 254, 0.4);
 }
 
@@ -543,18 +544,16 @@ input:focus, textarea:focus {
    TÍTULO DE PÁGINA ESTILO CAJA NEÓN (CENTRADO)
    ============================================================ */
 .titulo-caja-vapor {
-    background-color: var(--vw-bg) !important; /* Fondo morado oscuro sólido */
-    color: var(--vw-purple) !important; /* Texto púrpura */
+    background-color: var(--vw-bg) !important;
+    color: var(--vw-purple) !important;
     border: 2px solid var(--vw-purple) !important;
     padding: 15px 40px !important;
     letter-spacing: 2px;
     
-    /* ESTO LO HACE CENTRADO Y QUE OCUPE SOLO EL ANCHO DEL TEXTO */
     display: table;
     margin-left: auto;
     margin-right: auto;
     
-    /* Estilo Vaporwave */
     font-family: 'Press Start 2P', cursive;
     text-transform: uppercase;
     text-shadow: 0 0 10px var(--vw-cyan), 0 0 20px var(--vw-cyan);
@@ -562,7 +561,6 @@ input:focus, textarea:focus {
     transition: all 0.3s ease;
 }
 
-/* Efecto hover (cuando pasas el mouse) */
 .titulo-caja-vapor:hover {
     color: var(--vw-cyan) !important;
     border-color: var(--vw-cyan) !important;
@@ -594,7 +592,8 @@ input:focus, textarea:focus {
   letter-spacing: 2px;
   text-transform: uppercase;
 }
-.contenedor{
+
+.contenedor {
   background-image: url(login.jpeg);
   border-style: double;
   border-color: var(--vw-pink);
@@ -607,6 +606,7 @@ input:focus, textarea:focus {
   margin-top: 11vh;
   background-size: cover;
 }
+
 .fondo-editar-producto {
     background-image: url('login.jpeg'); 
     background-size: cover;
@@ -615,23 +615,15 @@ input:focus, textarea:focus {
     border-radius: 10px;
     padding: 3rem; 
 }
+
 .titulo-fondo-negro {
-    background-color: rgba(0, 0, 0, 0.7); /* El 0.7 es la transparencia al 70% */
+    background-color: rgba(0, 0, 0, 0.7);
     border-radius: 10px;       
     padding: 5px 15px;         
     display: inline-block;
     color: aliceblue;     
 }
-.vapor-img {
-    border-bottom: 2px solid var(--vw-purple);
-    width: 100%;
-    height: 220px; /* Altura de la tarjeta */
-    object-fit: contain; /* <-- CLAVE: Muestra la imagen COMPLETA */
-    background-color: #000;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-    padding: 10px;
-}
+
 #easter-egg-tank {
     position: fixed;
     top: 0;
@@ -643,17 +635,15 @@ input:focus, textarea:focus {
     display: none;
 }
 
-/* El GIF corriendo */
 .easter-egg-img-tank {
     position: absolute;
     top: 50%;
     left: -200px;
-    width: 250px; /* Tamaño del GIF */
+    width: 250px;
     transform: translateY(-50%);
     animation: correrTank 3s linear forwards;
 }
 
-/* Animación de izquierda a derecha */
 @keyframes correrTank {
     0% {
         left: -200px;
@@ -671,9 +661,6 @@ input:focus, textarea:focus {
     }
 }
 
-/*======
-tarjeta
-======== */
 .card {
     position: relative !important;
     overflow: hidden !important;
@@ -692,8 +679,6 @@ tarjeta
     display: flex !important;
     flex-direction: column !important;
     justify-content: space-between !important;
-    
-    /* Despliegue de arriba a abajo */
     transform: scaleY(0);
     transform-origin: top;
     opacity: 0;
@@ -704,6 +689,7 @@ tarjeta
     transform: scaleY(1) !important;
     opacity: 1 !important;
 }
+
 .texto-blanco {
     color: #ffffff !important;
     text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
@@ -711,81 +697,7 @@ tarjeta
     font-size: 1.15rem;
     line-height: 1.8;
 }
-/* ============================================================
-   ADMIN — LAYOUT CON SIDEBAR
-   ============================================================ */
 
-.admin-wrapper {
-  display: flex;
-  min-height: 80vh;
-  gap: 1.5rem;
-  padding: 1.5rem;
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.admin-sidebar {
-  width: 240px;
-  flex-shrink: 0;
-  background-color: rgba(26, 11, 46, 0.9);
-  border: 2px solid var(--vw-purple);
-  border-radius: 8px;
-  padding: 1rem 0;
-  box-shadow: 0 0 15px rgba(185, 103, 255, 0.25);
-  align-self: flex-start;
-}
-
-.admin-sidebar .sidebar-titulo {
-  color: var(--vw-cyan);
-  font-family: 'Press Start 2P', cursive;
-  font-size: 0.65rem;
-  text-align: center;
-  padding: 0 1rem 1rem 1rem;
-  border-bottom: 1px solid rgba(185, 103, 255, 0.3);
-  margin-bottom: 0.75rem;
-  text-shadow: var(--glow-cyan);
-}
-
-.admin-sidebar .sidebar-link {
-  display: block;
-  padding: 0.6rem 1.25rem;
-  color: var(--vw-purple);
-  font-family: 'VT323', monospace;
-  font-size: 1.1rem;
-  text-transform: uppercase;
-  text-decoration: none;
-  border-left: 3px solid transparent;
-  transition: all 0.2s ease;
-}
-
-.admin-sidebar .sidebar-link:hover {
-  color: var(--vw-cyan);
-  background-color: rgba(1, 205, 254, 0.06);
-  border-left-color: var(--vw-cyan);
-}
-
-.admin-sidebar .sidebar-link.active {
-  color: var(--vw-cyan);
-  background-color: rgba(1, 205, 254, 0.1);
-  border-left-color: var(--vw-cyan);
-  text-shadow: var(--glow-cyan);
-}
-
-.admin-content {
-  flex-grow: 1;
-  min-width: 0; /* evita overflow del flex */
-}
-
-/* Responsive: en pantallas chicas el sidebar pasa arriba */
-@media (max-width: 768px) {
-  .admin-wrapper {
-    flex-direction: column;
-    padding: 1rem;
-  }
-  .admin-sidebar {
-    width: 100%;
-  }
-}
 /* ============================================================
    ADMIN — LAYOUT CON SIDEBAR
    ============================================================ */
@@ -865,7 +777,6 @@ tarjeta
    UNIFORMIDAD ADMIN — Forzar estética vaporwave en Bootstrap
    ============================================================ */
 
-/* --- Labels de formularios --- */
 .form-label {
   color: var(--vw-cyan);
   font-family: 'VT323', monospace;
@@ -875,7 +786,6 @@ tarjeta
   margin-bottom: 0.25rem;
 }
 
-/* --- Inputs, selects, textareas --- */
 .form-control,
 .form-select,
 input,
@@ -907,7 +817,6 @@ select option {
   color: var(--vw-text);
 }
 
-/* --- Checkboxes y radios --- */
 .form-check-input {
   background-color: rgba(26, 11, 46, 0.85);
   border: 1px solid var(--vw-purple);
@@ -921,7 +830,6 @@ select option {
   font-family: 'VT323', monospace;
 }
 
-/* --- Encabezados de tabla (<th>) --- */
 .tabla-vaporwave thead th,
 .tabla-vaporwave th {
   background-color: rgba(185, 103, 255, 0.15) !important;
@@ -933,7 +841,6 @@ select option {
   padding: 10px 15px !important;
 }
 
-/* --- Filas de tabla: menos negro duro --- */
 .tabla-vaporwave td {
   background-color: rgba(0, 0, 0, 0.55) !important;
 }
@@ -942,12 +849,10 @@ select option {
   background-color: rgba(1, 205, 254, 0.08) !important;
 }
 
-/* --- Tablas estándar de Bootstrap --- */
 .table {
   color: var(--vw-text);
 }
 
-/* --- Botones uniformes --- */
 .btn {
   font-family: 'VT323', monospace !important;
   text-transform: uppercase;
@@ -1021,7 +926,6 @@ select option {
   font-size: 0.9rem !important;
 }
 
-/* --- Tabs --- */
 .nav-tabs {
   border-bottom: 2px solid var(--vw-purple);
 }
@@ -1043,7 +947,6 @@ select option {
   text-shadow: var(--glow-cyan);
 }
 
-/* --- Alerts coherentes --- */
 .alert {
   font-family: 'VT323', monospace;
   border-width: 2px;
@@ -1064,7 +967,6 @@ select option {
   color: var(--vw-cyan);
 }
 
-/* --- Links --- */
 a {
   color: var(--vw-cyan);
 }
@@ -1072,13 +974,11 @@ a:hover {
   color: var(--vw-pink);
 }
 
-/* --- Texto secundario/opacidad --- */
 .text-muted,
 small {
   color: rgba(224, 230, 237, 0.65) !important;
 }
 
-/* --- <dl> del perfil --- */
 dl.row dt {
   color: var(--vw-cyan);
   font-weight: normal;
@@ -1086,25 +986,65 @@ dl.row dt {
 dl.row dd {
   color: var(--vw-text);
 }
-.btn-vapor {
-  background-color: rgba(255, 113, 206, 0.15) !important;
+
+/* ============================================================
+   ADMIN — FORZAR TEXTO BLANCO EN TODO EL CONTENIDO
+   ============================================================ */
+
+.admin-content,
+.admin-content h1,
+.admin-content h2,
+.admin-content h3,
+.admin-content h4,
+.admin-content h5,
+.admin-content h6,
+.admin-content p,
+.admin-content span,
+.admin-content div,
+.admin-content td,
+.admin-content th,
+.admin-content label,
+.admin-content strong,
+.admin-content small {
+  color: #ffffff !important;
+}
+
+.admin-content a {
+  color: var(--vw-cyan) !important;
+}
+.admin-content a:hover {
   color: var(--vw-pink) !important;
-  border: 2px solid var(--vw-pink) !important;
-  box-shadow: 0 0 8px var(--vw-pink), inset 0 0 8px rgba(255, 113, 206, 0.3) !important;
-  font-family: 'Press Start 2P', cursive;
-  font-size: 0.7rem;
+}
+
+.admin-content table thead th {
+  color: var(--vw-cyan) !important;
+  text-shadow: 0 0 6px rgba(1, 205, 254, 0.5);
+  font-family: 'VT323', monospace;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  padding: 0.75rem 1.5rem;
-  transition: all 0.2s ease;
 }
 
-.btn-vapor:hover:not(:disabled) {
-  background-color: var(--vw-pink) !important;
-  color: var(--vw-bg) !important;
-  box-shadow: 0 0 15px var(--vw-pink) !important;
+.admin-content table tbody td {
+  color: #ffffff !important;
+  background-color: rgba(0, 0, 0, 0.55) !important;
+  vertical-align: middle;
 }
 
-.btn-vapor:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
+.admin-content table tbody tr:hover td {
+  background-color: rgba(1, 205, 254, 0.1) !important;
+}
+
+.admin-content input,
+.admin-content select,
+.admin-content textarea {
+  color: #ffffff !important;
+  background-color: rgba(26, 11, 46, 0.85) !important;
+  border: 1px solid var(--vw-purple) !important;
+}
+.admin-content input:focus,
+.admin-content select:focus,
+.admin-content textarea:focus {
+  border-color: var(--vw-cyan) !important;
+  box-shadow: 0 0 8px rgba(1, 205, 254, 0.5) !important;
+  outline: none !important;
 }

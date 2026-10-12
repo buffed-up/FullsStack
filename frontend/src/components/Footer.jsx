@@ -1,3 +1,4 @@
+import React from 'react'
 import { Link } from 'react-router-dom'
 
 function Footer() {
@@ -26,15 +27,19 @@ function Footer() {
             <h4 className="footer-titulo">NAVEGACIÓN</h4>
             <Link to="/" className="footer-enlace">Inicio</Link>
             <Link to="/productos" className="footer-enlace">Productos</Link>
+            <Link to="/ofertas" className="footer-enlace">Ofertas</Link>
+            <Link to="/blogs" className="footer-enlace">Blogs</Link>
+            <Link to="/nosotros" className="footer-enlace">Nosotros</Link>
+            <Link to="/contactos" className="footer-enlace">Contactos</Link>
             <Link to="/carrito" className="footer-enlace">Carrito</Link>
           </div>
 
           {/* Columna 3: Categorías */}
           <div className="col-lg-2 col-md-6 mb-4 mb-lg-0">
             <h4 className="footer-titulo">CATEGORÍAS</h4>
-            <a href="#" className="footer-enlace">Anime</a>
-            <a href="#" className="footer-enlace">Videojuegos</a>
-            <a href="#" className="footer-enlace">Películas</a>
+            <Link to="/productos?categoria=anime" className="footer-enlace">Anime</Link>
+            <Link to="/productos?categoria=videojuegos" className="footer-enlace">Videojuegos</Link>
+            <Link to="/productos?categoria=peliculas" className="footer-enlace">Películas</Link>
           </div>
 
           {/* Columna 4: Redes y Newsletter */}
@@ -85,8 +90,8 @@ function Footer() {
 
         <div className="footer-copy">
           &copy; 2026 BOOSTED UP! Todos los derechos reservados. |{' '}
-          <a href="#">Política de Privacidad</a> |{' '}
-          <a href="#">Términos de Uso</a>
+          <Link to="/politica-privacidad" className="footer-copy-link">Política de Privacidad</Link> |{' '}
+          <Link to="/terminos-uso" className="footer-copy-link">Términos de Uso</Link>
         </div>
       </div>
     </footer>

@@ -14,6 +14,9 @@ import PagoError from './views/PagoError'
 import Blogs from './views/Blogs'
 import BlogDetalle from './views/BlogDetalle'
 import BlogForm from './views/blogForm'
+import Nosotros from './views/Nosotros'
+import Contactos from './views/Contactos'
+import Ofertas from './views/Ofertas'
 import AdminLayout from './layouts/AdminLayout'
 import AdminDashboard from './views/admin/AdminDashboard'
 import AdminProductos from './views/admin/AdminProductos'
@@ -39,6 +42,9 @@ function App() {
           <Route path="/registro" element={<Registro />} />
           <Route path="/pago-ok" element={<PagoOk />} />
           <Route path="/pago-error" element={<PagoError />} />
+          <Route path="/nosotros" element={<Nosotros />} />
+          <Route path="/contactos" element={<Contactos />} />
+          <Route path="/ofertas" element={<Ofertas />} />
 
           {/* Blogs */}
           <Route path="/blogs" element={<Blogs />} />

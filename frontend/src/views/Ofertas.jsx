@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { getProductos } from '../services/api'
 import { useCarrito } from '../context/CarritoContext'
 
@@ -7,15 +8,18 @@ function Ofertas() {
   const [cargando, setCargando] = useState(true)
   const [error, setError] = useState(null)
   const { agregarAlCarrito } = useCarrito()
+  const navigate = useNavigate()
 
-  // Convierte "$15.990" a número 15990
-  const limpiarPrecio = (precioTexto) => {
-    return parseInt(precioTexto.replace(/[$.]/g, '').replace(/\s/g, ''))
-  }
-
-  // Formatea 15990 a "$15.990"
+  // Formatea un número a precio: 15990 → "$15.990"
   const formatearPrecio = (numero) => {
     return '$' + numero.toLocaleString('es-CL')
+  }
+
+  // Construye la URL completa de la imagen (que viene con /uploads/... del backend)
+  const obtenerUrlImagen = (img) => {
+    if (!img) return ''
+    if (img.startsWith('http')) return img
+    return `http://localhost:3000${img}`
   }
 
   useEffect(() => {
@@ -23,9 +27,10 @@ function Ofertas() {
       try {
         const productos = await getProductos()
         // Filtra solo los productos que están en oferta
-        const soloOfertas = productos.filter(p => p.en_oferta === true && p.descuento > 0)
+        const soloOfertas = productos.filter(p => p.es_oferta === true && p.descuento > 0)
         setOfertas(soloOfertas)
       } catch (err) {
+        console.error('Error al cargar ofertas:', err)
         setError('No se pudieron cargar las ofertas.')
       } finally {
         setCargando(false)
@@ -49,13 +54,17 @@ function Ofertas() {
 
       <div className="row justify-content-center g-4">
         {ofertas.map(producto => {
-          const precioOriginal = limpiarPrecio(producto.precio)
+          // El precio ya viene como número entero
+          const precioOriginal = producto.precio
           const precioOferta = Math.round(precioOriginal * (1 - producto.descuento / 100))
 
           return (
             <div key={producto.id} className="col-6 col-md-4 col-lg-3 mb-4">
-              <div className="card vapor-card h-100 text-center position-relative">
-
+              <div
+                className="card vapor-card h-100 text-center position-relative"
+                style={{ cursor: 'pointer' }}
+                onClick={() => navigate(`/producto/${producto.id}`)}
+              >
                 {/* Etiqueta de descuento */}
                 <span
                   className="position-absolute top-0 end-0 m-2"
@@ -74,10 +83,11 @@ function Ofertas() {
                 </span>
 
                 <img
-                  src={producto.img}
+                  src={obtenerUrlImagen(producto.img)}
                   className="card-img-top vapor-img"
                   alt={producto.titulo}
                 />
+
                 <div className="card-body d-flex flex-column">
                   <h5 className="card-title vapor-title">{producto.titulo}</h5>
 
@@ -104,12 +114,15 @@ function Ofertas() {
 
                   <button
                     className="btn btn-vapor mt-2"
-                    onClick={() => agregarAlCarrito(
-                      producto.id,
-                      producto.titulo,
-                      precioOferta,
-                      producto.img
-                    )}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      agregarAlCarrito(
+                        producto.id,
+                        producto.titulo,
+                        precioOferta,
+                        producto.img
+                      )
+                    }}
                   >
                     Añadir al carrito
                   </button>
