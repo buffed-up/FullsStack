@@ -35,7 +35,7 @@ function Productos() {
         <Link to="/productos" className="btn btn-secondary mb-3">← Ver todos los productos</Link>
       )}
 
-      <h1 className="mb-4">
+      <h1 className="titulo-caja-vapor mb-4">
         {coleccion ? `Colección: ${coleccion}` : 'Productos'}
       </h1>
 

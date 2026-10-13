@@ -24,21 +24,29 @@ function Nosotros() {
               background: '#000'
             }}
           />
-        </div>  
+        </div>
         <div className="col-md-7">
-          <h2 style={{ color: 'var(--vw-cyan)', textShadow: 'var(--glow-cyan)' }}>
-            Nacimos en 2026
-          </h2>
-          <p className="texto-blanco">
-            <strong>BOOSTED UP!</strong> nació en 2026 después de estar hartos de que las tiendas
-            geek tradicionales solo vendieran Gundams, figuras típicas de anime y Funkos.
-          </p>
-          <p className="texto-blanco">
-            Queríamos hacer algo diferente: una tienda que mantuviera la esencia de lo geek,
-            pero con <strong>artículos más únicos</strong> y un fuerte enfoque en
-            <strong> ayudar a quienes practican el cosplay</strong>, dándoles acceso a materiales,
-            props y piezas que normalmente son difíciles de encontrar en el mercado local.
-          </p>
+          <div className="vapor-card p-4" style={{ width: '100%' }}>
+            <h2
+              style={{
+                color: 'var(--vw-cyan)',
+                textShadow: 'var(--glow-cyan)',
+                marginBottom: '1rem'
+              }}
+            >
+              Nacimos en 2026
+            </h2>
+            <p className="texto-blanco" style={{ marginBottom: '1rem' }}>
+              <strong>BOOSTED UP!</strong> nació en 2026 después de estar hartos de que las tiendas
+              geek tradicionales solo vendieran Gundams, figuras típicas de anime y Funkos.
+            </p>
+            <p className="texto-blanco" style={{ marginBottom: 0 }}>
+              Queríamos hacer algo diferente: una tienda que mantuviera la esencia de lo geek,
+              pero con <strong>artículos más únicos</strong> y un fuerte enfoque en
+              <strong> ayudar a quienes practican el cosplay</strong>, dándoles acceso a materiales,
+              props y piezas que normalmente son difíciles de encontrar en el mercado local.
+            </p>
+          </div>
         </div>
       </div>
 
@@ -76,49 +84,54 @@ function Nosotros() {
         </div>
       </div>
 
-      {/* Sección: ¿Por qué elegirnos? */}
+      {/* Sección: ¿Por qué elegirnos? + Cierre (MISMO BLOQUE OSCURO) */}
       <div className="mb-5">
-        <h2 className="text-center mb-4" style={{ color: 'var(--vw-cyan)', textShadow: 'var(--glow-cyan)' }}>
-          ¿Por qué elegirnos?
-        </h2>
-        <div className="row justify-content-center g-4">
-          <div className="col-md-6">
-            <ul style={{ listStyle: 'none', padding: 0 }}>
-              <li className="texto-blanco" style={{ marginBottom: '1rem' }}>
-                 <strong>Curaduría única:</strong> No vendemos lo típico. Buscamos piezas especiales.
-              </li>
-              <li className="texto-blanco" style={{ marginBottom: '1rem' }}>
-                 <strong>Enfoque cosplayer:</strong> Materiales, props y accesorios para tus trajes.
-              </li>
-              <li className="texto-blanco" style={{ marginBottom: '1rem' }}>
-                 <strong>Envíos a todo Chile:</strong> Llevamos tus productos donde los necesites.
-              </li>
-            </ul>
+        <div className="vapor-card p-4" style={{ width: '100%' }}>
+          <h2
+            className="text-center mb-4"
+            style={{ color: 'var(--vw-cyan)', textShadow: 'var(--glow-cyan)' }}
+          >
+            ¿Por qué elegirnos?
+          </h2>
+          <div className="row justify-content-center g-4">
+            <div className="col-md-6">
+              <ul style={{ listStyle: 'none', padding: 0 }}>
+                <li className="texto-blanco" style={{ marginBottom: '1rem' }}>
+                  <strong>Curaduría única:</strong> No vendemos lo típico. Buscamos piezas especiales.
+                </li>
+                <li className="texto-blanco" style={{ marginBottom: '1rem' }}>
+                  <strong>Enfoque cosplayer:</strong> Materiales, props y accesorios para tus trajes.
+                </li>
+                <li className="texto-blanco" style={{ marginBottom: 0 }}>
+                  <strong>Envíos a todo Chile:</strong> Llevamos tus productos donde los necesites.
+                </li>
+              </ul>
+            </div>
+            <div className="col-md-6">
+              <ul style={{ listStyle: 'none', padding: 0 }}>
+                <li className="texto-blanco" style={{ marginBottom: '1rem' }}>
+                  <strong>Atención personalizada:</strong> Te ayudamos a encontrar lo que buscas.
+                </li>
+                <li className="texto-blanco" style={{ marginBottom: '1rem' }}>
+                  <strong>Productos exclusivos:</strong> Colaboraciones con artistas locales.
+                </li>
+                <li className="texto-blanco" style={{ marginBottom: 0 }}>
+                  <strong>Comunidad activa:</strong> Organizamos eventos y concursos de cosplay.
+                </li>
+              </ul>
+            </div>
           </div>
-          <div className="col-md-6">
-            <ul style={{ listStyle: 'none', padding: 0 }}>
-              <li className="texto-blanco" style={{ marginBottom: '1rem' }}>
-                 <strong>Atención personalizada:</strong> Te ayudamos a encontrar lo que buscas.
-              </li>
-              <li className="texto-blanco" style={{ marginBottom: '1rem' }}>
-                 <strong>Productos exclusivos:</strong> Colaboraciones con artistas locales.
-              </li>
-              <li className="texto-blanco" style={{ marginBottom: '1rem' }}>
-                 <strong>Comunidad activa:</strong> Organizamos eventos y concursos de cosplay.
-              </li>
-            </ul>
+
+          {/* Cierre dentro del mismo bloque */}
+          <div className="text-center mt-4">
+            <h3 style={{ color: 'var(--vw-pink)', textShadow: 'var(--glow-pink)' }}>
+              "Porque ser geek no es solo consumir: es crear, es vivir la cultura."
+            </h3>
+            <p className="texto-blanco" style={{ marginTop: '1rem', marginBottom: 0 }}>
+              — El equipo de BOOSTED UP!
+            </p>
           </div>
         </div>
-      </div>
-
-      {/* Cierre */}
-      <div className="text-center mt-5">
-        <h3 style={{ color: 'var(--vw-pink)', textShadow: 'var(--glow-pink)' }}>
-          "Porque ser geek no es solo consumir: es crear, es vivir la cultura."
-        </h3>
-        <p className="texto-blanco" style={{ marginTop: '1rem'  }}>
-          — El equipo de BOOSTED UP!
-        </p>
       </div>
 
     </div>

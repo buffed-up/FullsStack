@@ -470,14 +470,13 @@ input:focus, textarea:focus {
 }
 
 .vapor-title {
-    color: var(--vw-pink);
+    color: #ffffff !important;
     text-shadow: 0 0 5px var(--vw-pink);
     font-family: 'Press Start 2P', cursive;
     font-size: 0.7rem;
     margin-bottom: 10px;
     letter-spacing: 1px;
 }
-
 .vapor-price {
     color: var(--vw-green);
     font-size: 1.5rem;
@@ -545,7 +544,7 @@ input:focus, textarea:focus {
    ============================================================ */
 .titulo-caja-vapor {
     background-color: var(--vw-bg) !important;
-    color: var(--vw-purple) !important;
+    color: #ffffff !important;
     border: 2px solid var(--vw-purple) !important;
     padding: 15px 40px !important;
     letter-spacing: 2px;
@@ -1047,4 +1046,13 @@ dl.row dd {
   border-color: var(--vw-cyan) !important;
   box-shadow: 0 0 8px rgba(1, 205, 254, 0.5) !important;
   outline: none !important;
+}
+.titulo-seccion {
+  color: #ffffff !important;
+  text-shadow: 0 0 10px var(--vw-cyan), 0 0 20px var(--vw-cyan);
+  font-family: 'Press Start 2P', cursive;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
 }
