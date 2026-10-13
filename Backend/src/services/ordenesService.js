@@ -27,7 +27,7 @@ async function crearOrden(datos) {
     throw e;
   }
 
-  // FASE 1: resolver precios reales y total (fuera de la transacción)
+  // FASE 1: resolver productos, validar stock y calcular total
   let total = 0;
   const itemsResueltos = [];
   for (const item of datos.items) {
@@ -36,9 +36,14 @@ async function crearOrden(datos) {
       e.status = 400;
       throw e;
     }
-    const producto = await ordenesModel.getPrecioProducto(item.producto_id);
+    const producto = await ordenesModel.getPrecioStockProducto(item.producto_id);
     if (!producto) {
       const e = new Error(`Producto ${item.producto_id} no existe`);
+      e.status = 400;
+      throw e;
+    }
+    if (producto.stock < item.cantidad) {
+      const e = new Error(`Stock insuficiente para "${producto.titulo}" (disponible: ${producto.stock})`);
       e.status = 400;
       throw e;
     }
@@ -50,7 +55,7 @@ async function crearOrden(datos) {
     });
   }
 
-  // FASE 2: insertar orden + items en una sola transacción atómica
+  // FASE 2: insertar orden + items + descontar stock, todo en una transacción
   const queries = [
     sql`
       INSERT INTO ordenes (
@@ -73,6 +78,11 @@ async function crearOrden(datos) {
         ${it.cantidad},
         ${it.precio_unitario}
       )
+    `),
+    ...itemsResueltos.map(it => sql`
+      UPDATE productos
+      SET stock = stock - ${it.cantidad}
+      WHERE id = ${it.producto_id}
     `)
   ];
 
