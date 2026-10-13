@@ -62,7 +62,7 @@ function Login() {
         </button>
       </form>
 
-      <p className="mt-3 text-center">
+      <p className="mt-3 text-center texto-blanco-chico">
         ¿No tienes cuenta? <Link to="/registro">Regístrate</Link>
       </p>
     </div>
