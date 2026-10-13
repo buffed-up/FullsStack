@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useCarrito } from '../context/CarritoContext'
-import { useAuth } from '../context/AuthContext'
-import { crearOrden } from '../services/api'
+import { useCarrito } from '../../context/CarritoContext'
+import { useAuth } from '../../context/AuthContext'
+import { crearOrden } from '../../services/api'
 import React from 'react'
 
 function Carrito() {

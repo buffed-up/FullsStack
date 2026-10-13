@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getDestacados } from '../services/api'
+import { getDestacados } from '../../services/api'
 
 function Index() {
   const navigate = useNavigate()

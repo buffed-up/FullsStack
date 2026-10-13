@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams, Link } from 'react-router-dom'
-import { getProductos, getProductosPorColeccion } from '../services/api'
-import ProductoCard from '../components/ProductoCard'
+import { getProductos, getProductosPorColeccion } from '../../services/api'
+import ProductoCard from '../../components/ProductoCard'
 
 function Productos() {
   const [searchParams] = useSearchParams()

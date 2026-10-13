@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { login as apiLogin } from '../services/api'
-import { useAuth } from '../context/AuthContext'
+import { login as apiLogin } from '../../services/api'
+import { useAuth } from '../../context/AuthContext'
 
 function Login() {
   const [correo, setCorreo] = useState('')

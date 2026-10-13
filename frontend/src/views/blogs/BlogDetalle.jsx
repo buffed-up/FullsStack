@@ -5,8 +5,8 @@ import {
   eliminarBlog,
   crearComentario,
   eliminarComentario
-} from '../services/api'
-import { useAuth } from '../context/AuthContext'
+} from '../../services/api'
+import { useAuth } from '../../context/AuthContext'
 
 function ComentarioItem({ comentario, respuestas, onResponder, usuario, onEliminar, blogAutorId }) {
   const [respondiendo, setRespondiendo] = useState(false)

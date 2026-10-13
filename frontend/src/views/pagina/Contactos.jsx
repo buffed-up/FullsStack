@@ -58,7 +58,7 @@ function Contactos() {
       {/* Título */}
       <div className="text-center my-4">
         <h1 className="titulo-caja-vapor">¿NECESITAS AYUDA, JUGADOR?</h1>
-        <p className="text-light">Entonces ponte en contacto con la alianza!!!</p>
+        <p className="text-light">Entonces ponte en contacto con nosotros!!!</p>
       </div>
 
       {/* Formulario */}
@@ -91,7 +91,7 @@ function Contactos() {
                   Correo Electrónico
                 </label>
                 <input
-                  type="email"
+                  type="email" 
                   className="form-control"
                   id="email"
                   name="email"
