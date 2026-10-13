@@ -19,7 +19,7 @@ function PagoOk() {
 
         {orden ? (
           <>
-            <p style={{ opacity: 0.8 }}>Boleta #{orden.id}</p>
+            <p className="texto-blanco-chico" style={{ fontSize: '0.8rem', opacity: 0.7 }}>Boleta #{orden.id}</p>
 
             <hr style={{ borderColor: 'var(--vw-purple)' }} />
 
@@ -37,9 +37,9 @@ function PagoOk() {
                 <tbody>
                   {orden.items?.map(it => (
                     <tr key={it.id}>
-                      <td>{it.titulo || `Producto #${it.producto_id}`}</td>
-                      <td>{formatearPrecio(it.precio_unitario)}</td>
-                      <td>{it.cantidad}</td>
+                      <td className="texto-blanco-chico">{it.titulo || `Producto #${it.producto_id}`}</td>
+                      <td className="texto-blanco-chico">{formatearPrecio(it.precio_unitario)}</td>
+                      <td className="texto-blanco-chico">{it.cantidad}</td>
                       <td className="precio-items">
                         {formatearPrecio(it.precio_unitario * it.cantidad)}
                       </td>

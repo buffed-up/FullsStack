@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { getBlog, crearBlog, actualizarBlog, subirImagen } from '../services/api'
-import { useAuth } from '../context/AuthContext'
+import { getBlog, crearBlog, actualizarBlog, subirImagen } from '../../services/api'
+import { useAuth } from '../../context/AuthContext'
 
 function BlogForm() {
   const { id } = useParams()

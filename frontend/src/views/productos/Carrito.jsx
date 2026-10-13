@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useCarrito } from '../context/CarritoContext'
-import { useAuth } from '../context/AuthContext'
-import { crearOrden } from '../services/api'
+import { useCarrito } from '../../context/CarritoContext'
+import { useAuth } from '../../context/AuthContext'
+import { crearOrden } from '../../services/api'
 import React from 'react'
 
 function Carrito() {
@@ -19,6 +19,7 @@ function Carrito() {
 
   const [cupon, setCupon] = useState('')
   const [descuentoAplicado, setDescuentoAplicado] = useState(false)
+  const [cuponUsado, setCuponUsado] = useState(false)  
 
   const [envio, setEnvio] = useState({
     nombre_envio: usuario?.nombre || '',
@@ -38,13 +39,22 @@ function Carrito() {
   }
 
   const aplicarCupon = () => {
-    if (cupon.trim().toUpperCase() === 'VAPOR10') {
-      setDescuentoAplicado(true)
-      alert('¡Cupón aplicado! 10% de descuento.')
-    } else {
-      alert('Cupón inválido.')
-    }
+  const codigo = cupon.trim().toUpperCase()
+
+  
+  if (cuponUsado) {
+    alert('Este cupón ya fue aplicado.')
+    return
   }
+
+  if (codigo === 'VAPOR10') {
+    setDescuentoAplicado(true)
+    setCuponUsado(true)  
+    alert('¡Cupón aplicado! 10% de descuento.')
+  } else {
+    alert('Cupón inválido.')
+  }
+}
 
   const totalFinal = descuentoAplicado ? Math.round(totalPrecio * 0.9) : totalPrecio
 
@@ -87,6 +97,7 @@ function Carrito() {
       vaciarCarrito()
       setDescuentoAplicado(false)
       setCupon('')
+      setCuponUsado(false) 
       navigate('/pago-ok', { state: { orden } })
     } catch (e) {
       navigate('/pago-error', { state: { mensaje: e.message } })
@@ -110,7 +121,7 @@ function Carrito() {
       <div className="row">
         <div className="col-md-8">
           {carrito.length === 0 ? (
-            <p className="text-center">Tu carrito está vacío.</p>
+            <p className="text-center texto-blanco-chico">Tu carrito está vacío.</p>
           ) : (
             carrito.map(item => (
               <div key={item.id} className="row align-items-center mb-4 vapor-card p-3">
@@ -128,7 +139,7 @@ function Carrito() {
                 </div>
                 <div className="col-5">
                   <h5 className="vapor-title">{item.titulo}</h5>
-                  <p style={{ fontSize: '0.8rem', opacity: 0.7 }}>
+                  <p className="texto-blanco-chico" style={{ fontSize: '0.8rem', opacity: 0.7 }}>
                     Precio unitario: ${item.precio}
                   </p>
                 </div>

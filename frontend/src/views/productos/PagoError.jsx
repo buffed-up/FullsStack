@@ -8,7 +8,7 @@ function PagoError() {
     <div className="container my-5" style={{ maxWidth: '600px' }}>
       <div className="vapor-card p-4 text-center">
         <h2 style={{ color: 'var(--vw-pink)' }}>✗ No se pudo realizar el pago</h2>
-        <p style={{ marginTop: '1rem' }}>{mensaje}</p>
+        <p className="texto-blanco-chico" style={{ marginTop: '1rem' }}>{mensaje}</p>
 
         <div className="mt-4 d-flex gap-2 justify-content-center">
           <Link to="/carrito" className="btn btn-vapor">Volver al carrito</Link>

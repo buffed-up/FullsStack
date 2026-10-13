@@ -5,8 +5,8 @@ import {
   eliminarBlog,
   crearComentario,
   eliminarComentario
-} from '../services/api'
-import { useAuth } from '../context/AuthContext'
+} from '../../services/api'
+import { useAuth } from '../../context/AuthContext'
 
 function ComentarioItem({ comentario, respuestas, onResponder, usuario, onEliminar, blogAutorId }) {
   const [respondiendo, setRespondiendo] = useState(false)
@@ -248,7 +248,7 @@ function BlogDetalle() {
       )}
 
       {comentariosRaiz.length === 0 ? (
-        <p style={{ color: '#ffffff', opacity: 0.7 }}>Aún no hay comentarios.</p>
+        <p className="texto-blanco-chico">Aún no hay comentarios.</p>
       ) : (
         comentariosRaiz.map(c => (
           <ComentarioItem

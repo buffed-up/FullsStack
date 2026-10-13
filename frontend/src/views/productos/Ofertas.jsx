@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { getProductos } from '../services/api'
-import { useCarrito } from '../context/CarritoContext'
+import { getProductos } from '../../services/api'
+import { useCarrito } from '../../context/CarritoContext'
 
 function Ofertas() {
   const [ofertas, setOfertas] = useState([])

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { login as apiLogin } from '../services/api'
-import { useAuth } from '../context/AuthContext'
+import { login as apiLogin } from '../../services/api'
+import { useAuth } from '../../context/AuthContext'
 
 function Login() {
   const [correo, setCorreo] = useState('')
@@ -62,7 +62,7 @@ function Login() {
         </button>
       </form>
 
-      <p className="mt-3 text-center">
+      <p className="mt-3 text-center texto-blanco-chico">
         ¿No tienes cuenta? <Link to="/registro">Regístrate</Link>
       </p>
     </div>
