@@ -29,11 +29,11 @@ function ComentarioItem({ comentario, respuestas, onResponder, usuario, onElimin
         <strong style={{ color: 'var(--vw-cyan)' }}>
           {comentario.autor_nombre} {comentario.autor_apellido}
         </strong>
-        <small style={{ opacity: 0.6 }}>
+        <small style={{ color: '#ffffff', opacity: 0.7 }}>
           {comentario.fecha ? new Date(comentario.fecha).toLocaleString('es-CL') : ''}
         </small>
       </div>
-      <p style={{ marginTop: '0.5rem' }}>{comentario.comentario}</p>
+      <p style={{ marginTop: '0.5rem', color: '#ffffff' }}>{comentario.comentario}</p>
 
       <div className="d-flex gap-2">
         {usuario && (
@@ -173,9 +173,9 @@ function BlogDetalle() {
     }
   }
 
-  if (cargando) return <div className="container my-5"><p>Cargando...</p></div>
+  if (cargando) return <div className="container my-5"><p style={{ color: '#ffffff' }}>Cargando...</p></div>
   if (error && !blog) return <div className="container my-5"><div className="alert alert-danger">{error}</div></div>
-  if (!blog) return <div className="container my-5"><p>Blog no encontrado.</p></div>
+  if (!blog) return <div className="container my-5"><p style={{ color: '#ffffff' }}>Blog no encontrado.</p></div>
 
   const puedeEditar =
     usuario && (usuario.rol === 'admin' || usuario.id === blog.usuario_id)
@@ -198,7 +198,7 @@ function BlogDetalle() {
 
       <div className="vapor-card p-4 mb-4">
         <h1 style={{ color: 'var(--vw-pink)' }}>{blog.titulo}</h1>
-        <p style={{ opacity: 0.7 }}>
+        <p style={{ color: '#ffffff', opacity: 0.85 }}>
           Por {blog.autor_nombre} {blog.autor_apellido} · {new Date(blog.fecha).toLocaleDateString('es-CL')}
           {blog.categoria ? ` · ${blog.categoria}` : ''}
         </p>
@@ -211,7 +211,9 @@ function BlogDetalle() {
           />
         )}
 
-        <p style={{ whiteSpace: 'pre-wrap' }}>{blog.contenido}</p>
+        <p style={{ whiteSpace: 'pre-wrap', color: '#ffffff', fontSize: '1.15rem', lineHeight: '1.8' }}>
+          {blog.contenido}
+        </p>
 
         {puedeEditar && (
           <div className="mt-4 d-flex gap-2">
@@ -246,7 +248,7 @@ function BlogDetalle() {
       )}
 
       {comentariosRaiz.length === 0 ? (
-        <p style={{ opacity: 0.6 }}>Aún no hay comentarios.</p>
+        <p style={{ color: '#ffffff', opacity: 0.7 }}>Aún no hay comentarios.</p>
       ) : (
         comentariosRaiz.map(c => (
           <ComentarioItem
