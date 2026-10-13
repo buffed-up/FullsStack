@@ -248,7 +248,7 @@ function BlogDetalle() {
       )}
 
       {comentariosRaiz.length === 0 ? (
-        <p style={{ color: '#ffffff', opacity: 0.7 }}>Aún no hay comentarios.</p>
+        <p className="texto-blanco-chico">Aún no hay comentarios.</p>
       ) : (
         comentariosRaiz.map(c => (
           <ComentarioItem

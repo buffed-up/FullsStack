@@ -19,8 +19,8 @@ function ProductoDetalle() {
       .finally(() => setCargando(false))
   }, [id])
 
-  if (cargando) return <div className="container my-5"><p>Cargando...</p></div>
-  if (error) return <div className="container my-5"><div className="alert alert-danger">{error}</div></div>
+  if (cargando) return <div className="container my-5"><p className="texto-blanco-chico">Cargando...</p></div>
+  if (error) return <div className="container my-5"><div className="alert alert-danger texto-blanco-chico ">{error}</div></div>
   if (!producto) return <div className="container my-5"><p>Producto no encontrado.</p></div>
 
   const precioFormateado = new Intl.NumberFormat('es-CL', {

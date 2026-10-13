@@ -27,8 +27,8 @@ function Index() {
       maximumFractionDigits: 0
     }).format(n)
 
-  if (cargando) return <div className="container my-4"><p>Cargando...</p></div>
-  if (error) return <div className="container my-4"><p className="text-danger">Error: {error}</p></div>
+  if (cargando) return <div className="container my-4"><p className="texto-blanco-chico">Cargando...</p></div>
+  if (error) return <div className="container my-4"><p className="text-danger texto-blanco-chico ">Error: {error}</p></div>
 
   const primeras = destacados.slice(0, 3)
 
