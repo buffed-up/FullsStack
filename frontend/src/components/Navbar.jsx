@@ -46,6 +46,11 @@ function Navbar() {
             <li className="nav-item">
               <Link className={activo('/contactos')} to="/contactos">Contactos</Link>
             </li>
+              {usuario?.rol === 'admin' && (
+              <li className="nav-item">
+                <Link className={activo('/admin')} to="/admin">Admin</Link>
+              </li>
+            )}
           
           </ul>
 
