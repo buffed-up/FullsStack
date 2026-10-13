@@ -11,7 +11,7 @@ const renderConRouter = (componente) => {
 describe('Vista Index (integración con backend real)', () => {
   it('debería mostrar un mensaje de carga inicial', () => {
     renderConRouter(<Index />)
-    // Al inicio, antes de que el fetch termine, muestra "Cargando..."
+    // antes de que el fetch termine muestra cargando
     expect(screen.getByText(/Cargando/i)).toBeInTheDocument()
   })
 

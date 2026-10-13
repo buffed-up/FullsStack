@@ -26,7 +26,7 @@ describe('Vista Ofertas (integración con backend real)', () => {
 
   it('debería mostrar un mensaje de carga inicial', () => {
     renderConProviders(<Ofertas />)
-    // Al inicio, antes de que el fetch termine, muestra "Cargando ofertas..."
+    // antes de que el fetch termine, muestra cargando
     expect(screen.getByText(/Cargando ofertas/i)).toBeInTheDocument()
   })
 
