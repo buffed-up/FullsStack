@@ -3,17 +3,20 @@ import { describe, it, expect, beforeEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
 import { CarritoProvider } from '../context/CarritoContext'
-import Carrito from '../views/Carrito'
+import { AuthProvider } from '../context/AuthContext'
+import Carrito from '../views/productos/Carrito'
 
 const renderConProviders = (componente) => {
   return render(
     <BrowserRouter>
-      <CarritoProvider>{componente}</CarritoProvider>
+      <AuthProvider>
+        <CarritoProvider>{componente}</CarritoProvider>
+      </AuthProvider>
     </BrowserRouter>
   )
 }
 
-describe('Vista Carrito', () => {
+describe('Vista Carrito (integración con backend real)', () => {
   beforeEach(() => {
     localStorage.clear()
   })

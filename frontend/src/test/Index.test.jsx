@@ -1,41 +1,53 @@
 import React from 'react'
 import { describe, it, expect } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
-import Index from '../views/Index'
+import Index from '../views/pagina/Index'
 
 const renderConRouter = (componente) => {
   return render(<BrowserRouter>{componente}</BrowserRouter>)
 }
 
-describe('Vista Index (Menú Principal)', () => {
-  it('debería renderizar el carrusel', () => {
+describe('Vista Index (integración con backend real)', () => {
+  it('debería mostrar un mensaje de carga inicial', () => {
     renderConRouter(<Index />)
-    const carrusel = document.querySelector('.carousel')
-    expect(carrusel).toBeInTheDocument()
+    // Al inicio, antes de que el fetch termine, muestra "Cargando..."
+    expect(screen.getByText(/Cargando/i)).toBeInTheDocument()
   })
 
-  it('debería mostrar el título "NUEVOS LANZAMIENTOS"', () => {
+  it('debería renderizar el carrusel después de cargar', async () => {
     renderConRouter(<Index />)
-    const titulo = screen.getByText('NUEVOS LANZAMIENTOS')
-    expect(titulo).toBeInTheDocument()
+
+    await waitFor(
+      () => {
+        const carrusel = document.querySelector('.carousel')
+        expect(carrusel).toBeInTheDocument()
+      },
+      { timeout: 5000 }
+    )
   })
 
-  it('debería mostrar la Colección Destiny en la tabla', () => {
+  it('debería mostrar el título "NUEVOS LANZAMIENTOS"', async () => {
     renderConRouter(<Index />)
-    const destiny = screen.getAllByText('Colección Destiny')
-    expect(destiny.length).toBeGreaterThan(0)
+
+    await waitFor(
+      () => {
+        expect(screen.getByText('NUEVOS LANZAMIENTOS')).toBeInTheDocument()
+      },
+      { timeout: 5000 }
+    )
   })
 
-  it('debería mostrar la Colección Jujutsu Kaisen en la tabla', () => {
+  it('debería mostrar al menos un producto destacado del backend', async () => {
     renderConRouter(<Index />)
-    const kaisen = screen.getAllByText('Colección Jujutsu Kaisen')
-    expect(kaisen.length).toBeGreaterThan(0)
-  })
 
-  it('debería mostrar la Colección Team Fortress 2 en la tabla', () => {
-    renderConRouter(<Index />)
-    const tf2 = screen.getAllByText('Colección Team Fortress 2')
-    expect(tf2.length).toBeGreaterThan(0)
+    await waitFor(
+      () => {
+        const tarjetas = document.querySelectorAll('.card')
+        const filasTabla = document.querySelectorAll('.tabla-vaporwave tbody tr')
+        expect(tarjetas.length + filasTabla.length).toBeGreaterThan(0)
+      },
+      { timeout: 5000 }
+    )
   })
 })

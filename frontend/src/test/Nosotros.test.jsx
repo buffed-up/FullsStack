@@ -2,7 +2,7 @@ import React from 'react'
 import { describe, it, expect } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
-import Nosotros from '../views/Nosotros'
+import Nosotros from '../views/pagina/Nosotros'
 
 const renderConRouter = (componente) => {
   return render(<BrowserRouter>{componente}</BrowserRouter>)
