@@ -61,8 +61,8 @@ async function updateEstado(id, estado) {
   return resultado[0];
 }
 
-async function getPrecioProducto(productoId) {
-  const r = await sql`SELECT id, precio FROM productos WHERE id = ${productoId}`;
+async function getPrecioStockProducto(productoId) {
+  const r = await sql`SELECT id, titulo, precio, stock FROM productos WHERE id = ${productoId}`;
   return r[0];
 }
 
@@ -71,5 +71,5 @@ module.exports = {
   findById,
   findByUsuario,
   updateEstado,
-  getPrecioProducto
+  getPrecioStockProducto
 };
