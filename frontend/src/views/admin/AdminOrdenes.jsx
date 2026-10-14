@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { getOrdenes, getOrden, actualizarEstadoOrden } from '../../services/api'
 
 const TABS = ['Listar', 'Detalle']
